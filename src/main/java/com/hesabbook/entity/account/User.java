@@ -23,6 +23,23 @@ public class User {
     private String role;
     private String email;
     private String password;
+    private String mobileNumber;
+    private String tempPassword;
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getTempPassword() {
+        return tempPassword;
+    }
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
+    }
     public Integer getId() {
         return id;
     }
