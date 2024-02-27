@@ -27,16 +27,12 @@ public class HesabbookApplication {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-
-        // Allow requests from localhost:3000
-        config.addAllowedOrigin("http://localhost:3000");
-
+        // Allow all origins
+        config.addAllowedOrigin("*");
         // Allow all HTTP methods
         config.addAllowedMethod("*");
-
         // Allow all headers
         config.addAllowedHeader("*");
-
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
