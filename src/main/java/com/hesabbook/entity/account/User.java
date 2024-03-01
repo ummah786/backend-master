@@ -26,14 +26,14 @@ public class User {
     private String mobileNumber;
     private String tempPassword;
 
-    private Integer primary_user_id;
+    private String primary_user_id;
     private String secondary_user_id;
 
-    public Integer getPrimary_user_id() {
+    public String getPrimary_user_id() {
         return primary_user_id;
     }
 
-    public void setPrimary_user_id(Integer primary_user_id) {
+    public void setPrimary_user_id(String primary_user_id) {
         this.primary_user_id = primary_user_id;
     }
 
