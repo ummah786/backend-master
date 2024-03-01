@@ -16,11 +16,11 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/user/temp")
-    public User saveTempUser(@RequestBody User user){
+    public User saveTempUser(@RequestBody User user) {
         Random random = new Random();
         int randomData = random.nextInt(90000000) + 10000000;
         user.setPrimary_user_id(String.valueOf(randomData));
-       User userResponse= userService.save(user);
-       return userResponse;
+        User userResponse = userService.save(user);
+        return userResponse;
     }
 }
