@@ -26,6 +26,26 @@ public class User {
     private String mobileNumber;
     private String tempPassword;
 
+    private Integer primaryUserId;
+    private String secondaryUserId;
+
+
+    public Integer getPrimaryUserId() {
+        return primaryUserId;
+    }
+
+    public void setPrimaryUserId(Integer primaryUserId) {
+        this.primaryUserId = primaryUserId;
+    }
+
+    public String getSecondaryUserId() {
+        return secondaryUserId;
+    }
+
+    public void setSecondaryUserId(String secondaryUserId) {
+        this.secondaryUserId = secondaryUserId;
+    }
+
     public String getMobileNumber() {
         return mobileNumber;
     }
