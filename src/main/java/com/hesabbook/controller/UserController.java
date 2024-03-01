@@ -1,5 +1,7 @@
 package com.hesabbook.controller;
 
+import java.util.Random;
+
 import com.hesabbook.entity.account.User;
 import com.hesabbook.service.UserService;
 
@@ -15,6 +17,9 @@ public class UserController {
 
     @PostMapping("/user/temp")
     public User saveTempUser(@RequestBody User user){
+        Random random = new Random();
+        int randomData = random.nextInt(90000000) + 10000000;
+        user.setPrimary_user_id(String.valueOf(randomData));
        User userResponse= userService.save(user);
        return userResponse;
     }
