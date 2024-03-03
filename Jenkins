@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'springboot'
+        imagename='jobportal'
+          dockerImage = ''
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout code from GitHub repository
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: '*/main']],
+                              userRemoteConfigs: [[url: 'https://github.com/ummah786/backend-master.git']]])
+                }
+            }
+        }
+        tage('Build') {
+            steps {
+                script {
+                    sh "mvn clean package -DskipTests=true"
+                }
+            }
+        }
+        stage('Remove Existing Docker Image') {
+                    steps {
+                        script {
+                            sh "docker stop springboot | true"
+                            sh "docker rm springboot | true"
+                            sh "docker image rmi -f springboot:1.1 "
+                        }
+                    }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                 sh "docker image build -t springboot:1.1 . "
+                }
+            }
+        }
+        stage('Print Docker Path') {
+    steps {
+        script {
+            sh 'which docker'
+        }
+    }
+}
+
+ stage('Run Docker Container') {
+            steps {
+                // Run the Docker container  ## prod  http://localhost:8808/user/temp
+             sh 'docker run -d --network db-app  -p 8808:8080 --name springboot  springboot:1.1'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
