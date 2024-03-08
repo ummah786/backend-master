@@ -1,3 +1,4 @@
+/*
 package com.hesabbook.service;
 
 import java.util.HashMap;
@@ -25,4 +26,4 @@ public class KafkaConsumerConfig {
     public void listen(String message) {
         System.out.println("Received message: " + message);
     }
-}
+}*/

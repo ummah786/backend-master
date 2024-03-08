@@ -1,5 +1,7 @@
 package com.hesabbook.entity.account;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table
-public class ManageUsers {
+public class ManageUsers implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
@@ -29,6 +31,9 @@ public class ManageUsers {
     private String emailAddress;
     private String role;
     private String address;
+    private String primary_user_id;
+    private String secondary_user_id;
+    private String tempPassword;
 
 }
 
