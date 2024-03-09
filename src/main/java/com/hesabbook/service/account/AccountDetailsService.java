@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.hesabbook.entity.account.AccountDetails;
+import com.hesabbook.entity.account.ManageUsers;
 import com.hesabbook.repository.AccountDetailsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,10 @@ public class AccountDetailsService {
 
     public List<AccountDetails> findAll() {
         return accountDetailsRepository.findAll();
+    }
+
+    public List<AccountDetails> findByPrimaryUserId(String id) {
+        return accountDetailsRepository.findByPrimaryUserId(id);
     }
 
 }

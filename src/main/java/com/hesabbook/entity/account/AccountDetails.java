@@ -1,5 +1,7 @@
 package com.hesabbook.entity.account;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table
-public class AccountDetails {
+public class AccountDetails implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")

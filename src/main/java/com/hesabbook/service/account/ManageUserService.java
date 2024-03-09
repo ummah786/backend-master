@@ -38,4 +38,8 @@ public class ManageUserService {
     public List<ManageUsers> findAll() {
         return manageUsersRepository.findAll();
     }
+
+    public List<ManageUsers> findByPrimaryUserId(String id) {
+        return manageUsersRepository.findByPrimaryUserId(id);
+    }
 }

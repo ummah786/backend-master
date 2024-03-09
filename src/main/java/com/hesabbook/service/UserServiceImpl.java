@@ -63,6 +63,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findByEmails(String email) {
+        return userRepository.findByEmails(email);
+    }
+
+    @Override
+    public User findByMobileNumber(String mobileNumber) {
+        return userRepository.findByMobileNumber(mobileNumber);
+    }
+
+    @Override
+    public List<User> findByPrimaryUserId(String id) {
+        return userRepository.findByPrimaryUserId(id);
+    }
+
+    @Override
     public void deleteInBatch(List<User> users) {
         userRepository.deleteInBatch(users);
     }
