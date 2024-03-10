@@ -23,7 +23,6 @@ public class PartnerController {
 
     @GetMapping("/all")
     public BusinessResponse getAllMangeUser() {
-
         BusinessResponse businessResponse = new BusinessResponse();
         List<Partner> accountDetailResponse = partyService.findAll();
         businessResponse.setCode(200);
