@@ -19,44 +19,49 @@ public class BatchUpdate {
     private JdbcTemplate jdbcTemplate;
 
     public void batchUpdate(List<Partner> entities) {
-        String sql = "insert   " +
-                "        into  " +
-                "            partner  " +
-                "            (billing_address, company, creation_date_time, credit_limit, " +
-                "credit_period, credit_period_type, email, gst_number, loyality, mobile_number, " +
-                "opening_balance, opening_balance_type, p_name, party_category, party_type, shipping_address,primary_user_id,secondary_user_id)   " +
-                "        values  " +
-                "            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        try {
+            String sql = "insert   " +
+                    "        into  " +
+                    "            partner  " +
+                    "            (billing_address, company, creation_date_time, credit_limit, " +
+                    "credit_period, credit_period_type, email, gst_number, loyality, mobile_number, " +
+                    "opening_balance, opening_balance_type, p_name, party_category, party_type, shipping_address,primary_user_id,secondary_user_id)   " +
+                    "        values  " +
+                    "            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
-        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
-                Partner entity = entities.get(i);
-                preparedStatement.setString(1, entity.getBillingAddress());
-                preparedStatement.setString(2, entity.getCompany());
-                preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
-                preparedStatement.setString(4, entity.getCreditLimit());
-                preparedStatement.setString(5, entity.getCreditPeriod());
-                preparedStatement.setString(6, entity.getCreditPeriodType());
-                preparedStatement.setString(7, entity.getEmail());
-                preparedStatement.setString(8, entity.getGstNumber());
-                preparedStatement.setString(9, entity.getLoyality());
-                preparedStatement.setString(10, entity.getMobileNumber());
-                preparedStatement.setString(11, entity.getOpeningBalance());
-                preparedStatement.setString(12, entity.getOpeningBalanceType());
-                preparedStatement.setString(13, entity.getPName());
-                preparedStatement.setString(14, entity.getPartyCategory());
-                preparedStatement.setString(15, entity.getPartyType());
-                preparedStatement.setString(16, entity.getShippingAddress());
-                preparedStatement.setString(17, entity.getPrimary_user_id());
-                preparedStatement.setString(18, entity.getSecondary_user_id());
-            }
+            jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+                @Override
+                public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                    Partner entity = entities.get(i);
+                    preparedStatement.setString(1, entity.getBillingAddress());
+                    preparedStatement.setString(2, entity.getCompany());
+                    preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+                    preparedStatement.setString(4, entity.getCreditLimit());
+                    preparedStatement.setString(5, entity.getCreditPeriod());
+                    preparedStatement.setString(6, entity.getCreditPeriodType());
+                    preparedStatement.setString(7, entity.getEmail());
+                    preparedStatement.setString(8, entity.getGstNumber());
+                    preparedStatement.setString(9, entity.getLoyality());
+                    preparedStatement.setString(10, entity.getMobileNumber());
+                    preparedStatement.setString(11, entity.getOpeningBalance());
+                    preparedStatement.setString(12, entity.getOpeningBalanceType());
+                    preparedStatement.setString(13, entity.getPName());
+                    preparedStatement.setString(14, entity.getPartyCategory());
+                    preparedStatement.setString(15, entity.getPartyType());
+                    preparedStatement.setString(16, entity.getShippingAddress());
+                    preparedStatement.setString(17, entity.getPrimary_user_id());
+                    preparedStatement.setString(18, entity.getSecondary_user_id());
+                }
 
-            @Override
-            public int getBatchSize() {
-                return entities.size();
-            }
-        });
+                @Override
+                public int getBatchSize() {
+                    return entities.size();
+                }
+            });
+        }catch (Exception exception){
+            System.out.println("exception   "+exception);
+        }
+        System.out.println("DONE ");
     }
 
     public void batchUpdateItems(List<Inventory> entities) {
