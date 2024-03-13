@@ -5,6 +5,7 @@ import java.util.Random;
 import com.hesabbook.entity.account.User;
 import com.hesabbook.service.UserService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,21 +35,28 @@ public class HesabbookApplication {
     @PostMapping("/user/temp")
     public User saveTempUser(@RequestBody User user) {
         Random random = new Random();
-        int randomData = random.nextInt(90000000) + 10000000;
-        user.setPrimary_user_id(String.valueOf(randomData));
+        if(StringUtils.isNotBlank(user.getFirstName())){
+            int randomNumber = random.nextInt(90000) + 10000;
+            user.setPrimary_user_id(user.getFirstName().trim()+randomNumber);
+        }else if(StringUtils.isNotBlank(user.getMobileNumber())){
+            int randomNumber = random.nextInt(900) + 100;
+            user.setPrimary_user_id(user.getMobileNumber().trim()+randomNumber);
+        }else if(StringUtils.isNotBlank(user.getEmail())){
+            int randomNumber = random.nextInt(900) + 100;
+            user.setPrimary_user_id(user.getEmail().trim()+randomNumber);
+        }else {
+            int randomData = random.nextInt(90000000) + 10000000;
+            user.setPrimary_user_id(String.valueOf(randomData));
+        }
         User userResponse = userService.save(user);
         return userResponse;
     }
-
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        // Allow all origins
         config.addAllowedOrigin("*");
-        // Allow all HTTP methods
         config.addAllowedMethod("*");
-        // Allow all headers
         config.addAllowedHeader("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
