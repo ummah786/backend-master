@@ -49,19 +49,6 @@ public class PartyService {
         return partnerRepository.findAll();
     }
 
-    /*    public Partner findByEmail(String email) {
-            return partnerRepository.findByEmail(email);
-        }
-
-
-        public List<Partner> findByEmails(String email) {
-            return partnerRepository.findByEmails(email);
-        }
-
-
-        public Partner findByMobileNumber(String mobileNumber) {
-            return partnerRepository.findByMobileNumber(mobileNumber);
-        }*/
     public List<Partner> findByPrimaryPartnerId(String id) {
         return partnerRepository.findByPrimaryUserId(id);
     }
@@ -112,17 +99,16 @@ public class PartyService {
     public boolean areAllFieldsNull(Partner obj) {
         Class<?> clazz = obj.getClass();
         Field[] fields = clazz.getDeclaredFields();
-
         for (Field field : fields) {
             field.setAccessible(true);
             try {
                 if (field.get(obj) != null) {
-                    return false; // At least one field is not null
+                    return false;
                 }
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
         }
-        return true; // All fields are null
+        return true;
     }
 }

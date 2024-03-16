@@ -30,7 +30,6 @@ public class Inventory implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Integer id;
-    private String insertionDate;
     private String userName;
     private String item;
     private String category;//create a new
@@ -42,7 +41,6 @@ public class Inventory implements Serializable {
     private String lowStock;
     private String lowStockCheckBox;
     private String rackNo;//create a new
-
     private String challanNo;
     private String unitNo;//dose,strip,injection,tables
     private String packageItems; // 5  * 10
@@ -56,6 +54,7 @@ public class Inventory implements Serializable {
     private String expireDate;
     private String mrp;
     private String compensationCess;
+    private String gst;
     private String utgst;
     private String sgst;
     private String igst;
@@ -75,7 +74,6 @@ public class Inventory implements Serializable {
     private String taxTable;
     @Transient
     private String amountTable;
-
     @PrePersist
     public void prePersist() {
         this.creationDateTime = new Date();
