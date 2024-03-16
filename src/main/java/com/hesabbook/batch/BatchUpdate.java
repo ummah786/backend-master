@@ -64,7 +64,7 @@ public class BatchUpdate {
         System.out.println("DONE ");
     }
 
-    public void batchUpdateItems(List<Inventory> entities) {
+/*    public void batchUpdateItems(List<Inventory> entities) {
         String sql = "    insert " +
                 "           into" +
                 "                inventory" +
@@ -89,7 +89,7 @@ public class BatchUpdate {
                 preparedStatement.setString(6, entity.getCompanyName());
                 preparedStatement.setString(7, entity.getCompensationCess());
                 preparedStatement.setString(8, entity.getExpireDate());
-                preparedStatement.setString(9, entity.getGstPercentage());
+                preparedStatement.setString(9, entity.getGst());
                 preparedStatement.setString(10, entity.getHsn());
                 preparedStatement.setString(11, entity.getIgst());
                 preparedStatement.setString(12, entity.getInsertionDate());
@@ -124,5 +124,5 @@ public class BatchUpdate {
                 return entities.size();
             }
         });
-    }
+    }*/
 }

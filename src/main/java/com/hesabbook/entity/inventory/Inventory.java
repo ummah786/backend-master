@@ -59,7 +59,6 @@ public class Inventory implements Serializable {
     private String sgst;
     private String igst;
     private String cgst;
-    private String gstPercentage;
     private String supplier;
     private String warehouse;
     private String hsn;
