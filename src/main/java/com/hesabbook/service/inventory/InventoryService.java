@@ -65,23 +65,37 @@ public class InventoryService {
 
 
     public Inventory mapToInventory(LinkedHashMap<String, String> linkedHashMap) {
-        Inventory Inventory = new Inventory();
-        /*Inventory.setPName(linkedHashMap.get("col0"));
-        Inventory.setMobileNumber(linkedHashMap.get("col1"));
-        Inventory.setEmail(linkedHashMap.get("col2"));
-        Inventory.setBillingAddress(linkedHashMap.get("col3"));
-        Inventory.setShippingAddress(linkedHashMap.get("col4"));
-        Inventory.setCompany(linkedHashMap.get("col5"));
-        Inventory.setGstNumber(linkedHashMap.get("col6"));
-        Inventory.setPartyCategory(linkedHashMap.get("col7"));
-        Inventory.setCreditLimit(linkedHashMap.get("col8"));
-        Inventory.setCreditPeriod(linkedHashMap.get("col9"));
-        Inventory.setCreditPeriodType(linkedHashMap.get("col10"));
-        Inventory.setOpeningBalance(linkedHashMap.get("col11"));
-        Inventory.setOpeningBalanceType(linkedHashMap.get("col12"));*/
-        boolean flag = areAllFieldsNull(Inventory);
+        Inventory inventory = new Inventory();
+        inventory.setItem(linkedHashMap.get("col0"));
+        inventory.setItemCode(linkedHashMap.get("col1"));
+        inventory.setItemDescription(linkedHashMap.get("col3"));
+        inventory.setBarCodeValue(linkedHashMap.get("col3"));
+        inventory.setMrp(linkedHashMap.get("col4"));
+        inventory.setSalePrice(linkedHashMap.get("col5"));
+        inventory.setSalePriceTax(linkedHashMap.get("col6"));
+        inventory.setPurchasePrice(linkedHashMap.get("col7"));
+        inventory.setPurchasePriceTax(linkedHashMap.get("col8"));
+        inventory.setRackNo(linkedHashMap.get("col9"));
+        inventory.setCategory(linkedHashMap.get("col10"));
+        inventory.setCompanyName(linkedHashMap.get("col11"));
+        inventory.setGst(linkedHashMap.get("col12"));
+        inventory.setSupplier(linkedHashMap.get("col13"));
+        inventory.setWarehouse(linkedHashMap.get("col14"));
+        inventory.setHsn(linkedHashMap.get("col15"));
+        inventory.setBatchNo(linkedHashMap.get("col16"));
+        inventory.setMfgDate(linkedHashMap.get("col17"));
+        inventory.setExpireDate(linkedHashMap.get("col18"));
+        inventory.setSalt(linkedHashMap.get("col19"));
+        inventory.setPackageItems(linkedHashMap.get("col20"));
+        inventory.setLowStock(linkedHashMap.get("col21"));
+        inventory.setLowStockCheckBox(linkedHashMap.get("col22"));
+        inventory.setTotalStock(linkedHashMap.get("col23"));
+        inventory.setUnitNo(linkedHashMap.get("col24"));
+        inventory.setChallanNo(linkedHashMap.get("col25"));
+
+        boolean flag = areAllFieldsNull(inventory);
         if (!flag) {
-            return Inventory;
+            return inventory;
         } else {
             return null;
         }
