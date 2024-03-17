@@ -23,6 +23,9 @@ public interface ProductKeyValuesRepository extends JpaRepository<ProductKeyValu
     @Query(value = "SELECT value FROM product_category WHERE kes='warehouse' and primary_user_id=:id", nativeQuery = true)
     List<String> findByKeyWareHouse(@Param("id") String id);
 
+    @Query(value = "SELECT value FROM product_category WHERE kes='businessName' and primary_user_id=:id", nativeQuery = true)
+    List<String> findByBusinessName(@Param("id") String id);
+
     @Query(value = "select * from product_category where primary_user_id=:id", nativeQuery = true)
     List<ProductKeyValues> findByPrimaryUserId(@Param("id") String id);
 }
