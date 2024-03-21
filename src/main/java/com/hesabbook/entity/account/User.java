@@ -28,6 +28,34 @@ public class User {
 
     private String primary_user_id;
     private String secondary_user_id;
+    private String isLogin;
+    private String lastLoginDate;
+
+    public String getIsLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(String isLogin) {
+        this.isLogin = isLogin;
+    }
+
+    public String getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(String lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
     public String getPrimary_user_id() {
         return primary_user_id;

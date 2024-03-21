@@ -42,4 +42,7 @@ public class AccountDetails implements Serializable {
     private String businessRegistrationType;
     private String logo;
     private String signature;
+
+    private String primary_user_id;
+    private String secondary_user_id;
 }

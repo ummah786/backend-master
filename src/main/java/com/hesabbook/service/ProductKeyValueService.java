@@ -3,7 +3,7 @@ package com.hesabbook.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.hesabbook.entity.ProductKeyValues;
+import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.repository.ProductKeyValuesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,11 @@ public class ProductKeyValueService {
     @Autowired
     private ProductKeyValuesRepository productKeyValuesRepository;
 
-    public ProductKeyValues save(ProductKeyValues accountDetails) {
+    public ProductKeyValuePair save(ProductKeyValuePair accountDetails) {
         return productKeyValuesRepository.save(accountDetails);
     }
 
-    public void delete(ProductKeyValues entity) {
+    public void delete(ProductKeyValuePair entity) {
         productKeyValuesRepository.delete(entity);
     }
 
@@ -26,15 +26,15 @@ public class ProductKeyValueService {
         productKeyValuesRepository.deleteById(id);
     }
 
-    public ProductKeyValues find(Integer id) {
-        Optional<ProductKeyValues> AccountDetailsOptional = productKeyValuesRepository.findById(id);
+    public ProductKeyValuePair find(Integer id) {
+        Optional<ProductKeyValuePair> AccountDetailsOptional = productKeyValuesRepository.findById(id);
         return AccountDetailsOptional.orElse(null);
     }
-    public List<ProductKeyValues> findAll() {
+    public List<ProductKeyValuePair> findAll() {
         return productKeyValuesRepository.findAll();
     }
 
-    public List<ProductKeyValues> getPrimaryUserId(String id) {
+    public List<ProductKeyValuePair> getPrimaryUserId(String id) {
         return productKeyValuesRepository.findByPrimaryUserId(id);
     }
 
@@ -51,7 +51,8 @@ public class ProductKeyValueService {
         return productKeyValuesRepository.findByKeyWareHouse(id);
     }
     public List<String> getBusinessName(String id) {
-        return productKeyValuesRepository.findByBusinessName(id);
+        return productKeyValuesRepository.findByBusinessName();
+                //findByBusinessName(id);
     }
 
 }

@@ -47,19 +47,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean authenticate(String username, String password) {
-        User user = this.findByEmail(username);
-        if (user == null) {
-            return false;
-        } else {
-            if (password.equals(user.getPassword())) return true;
-            else return false;
+    public User authenticate(String username, String password) {
+        List<User> users = userRepository.findByEmail(username);
+        User usersss = new User();
+
+        Boolean flag = false;
+        if (users != null && users.size() > 0) {
+            for (User user : users) {
+                if (user == null) {
+                    user = this.findByMobileNumber(username);
+                    flag = getaBoolean(user, password, flag);
+                    if (flag == null) {
+                        return user;
+                    } else {
+                        return user;
+                    }
+                } else {
+                    if (password.equals(user.getPassword())) {
+                        return user;
+                    } else {
+                        return user;
+                    }
+                }
+            }
+        } else if (users != null && users.size() == 0) {
+            User userss = this.findByMobileNumber(username);
+            flag = getaBoolean(usersss, password, flag);
+            if (flag == null) {
+                return userss;
+            } else {
+                return userss;
+            }
         }
+        return usersss;
     }
 
     @Override
-    public User findByEmail(String email) {
+    public List<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    private Boolean getaBoolean(User user, String password, Boolean flag) {
+        if (user == null) {
+            return null;
+        } else {
+            if (password.equals(user.getTempPassword())) {
+                flag = true;
+            } else {
+                return null;
+            }
+        }
+        return flag;
     }
 
     @Override

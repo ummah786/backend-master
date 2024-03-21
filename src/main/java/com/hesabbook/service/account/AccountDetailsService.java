@@ -3,9 +3,10 @@ package com.hesabbook.service.account;
 import java.util.List;
 import java.util.Optional;
 
+import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.entity.account.AccountDetails;
-import com.hesabbook.entity.account.ManageUsers;
 import com.hesabbook.repository.AccountDetailsRepository;
+import com.hesabbook.service.ProductKeyValueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,16 @@ import org.springframework.stereotype.Service;
 public class AccountDetailsService {
     @Autowired
     AccountDetailsRepository accountDetailsRepository;
+    @Autowired
+    private ProductKeyValueService productKeyValueService;
 
     public AccountDetails save(AccountDetails accountDetails) {
+        ProductKeyValuePair productkeyValuePair =new ProductKeyValuePair();
+        productkeyValuePair.setKes("businessName");
+        productkeyValuePair.setValue(accountDetails.getBusinessName());
+        productkeyValuePair.setPrimary_user_id(accountDetails.getPrimary_user_id());
+        productkeyValuePair.setSecondary_user_id(accountDetails.getSecondary_user_id());
+        productKeyValueService.save(productkeyValuePair);
         return accountDetailsRepository.save(accountDetails);
     }
 

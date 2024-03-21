@@ -2,7 +2,7 @@ package com.hesabbook.controller;
 
 import java.util.List;
 
-import com.hesabbook.entity.ProductKeyValues;
+import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.service.ProductKeyValueService;
 import com.hesabbook.utils.BusinessResponse;
 
@@ -23,27 +23,27 @@ public class ProductKeyValueController {
     @GetMapping("/get/{id}")
     public BusinessResponse getById(@PathVariable("id") Integer id) {
         BusinessResponse businessResponse = new BusinessResponse();
-        ProductKeyValues ProductKeyValuesResponse = ProductKeyValuesService.find(id);
+        ProductKeyValuePair productKeyValuePairResponse = ProductKeyValuesService.find(id);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
-        businessResponse.setResponse(ProductKeyValuesResponse);
+        businessResponse.setResponse(productKeyValuePairResponse);
         return businessResponse;
     }
 
     @PostMapping("/save")
-    public BusinessResponse updateSave(@RequestBody ProductKeyValues productKeyValues) {
+    public BusinessResponse updateSave(@RequestBody ProductKeyValuePair productkeyValuePair) {
         BusinessResponse businessResponse = new BusinessResponse();
-        ProductKeyValues ProductKeyValuess = new ProductKeyValues();
-        ProductKeyValuess.setId(productKeyValues.getId());
-        ProductKeyValuess.setKes(productKeyValues.getKes());
-        ProductKeyValuess.setValue(productKeyValues.getValue());
-        ProductKeyValuess.setPrimary_user_id(productKeyValues.getPrimary_user_id());
-        ProductKeyValuess.setSecondary_user_id(productKeyValues.getSecondary_user_id());
+        ProductKeyValuePair productKeyValuess = new ProductKeyValuePair();
+        productKeyValuess.setId(productkeyValuePair.getId());
+        productKeyValuess.setKes(productkeyValuePair.getKes());
+        productKeyValuess.setValue(productkeyValuePair.getValue());
+        productKeyValuess.setPrimary_user_id(productkeyValuePair.getPrimary_user_id());
+        productKeyValuess.setSecondary_user_id(productkeyValuePair.getSecondary_user_id());
         try {
-            ProductKeyValues responseProductKeyValues = ProductKeyValuesService.save(ProductKeyValuess);
+            ProductKeyValuePair responseProductKeyValuePair = ProductKeyValuesService.save(productKeyValuess);
             businessResponse.setCode(200);
             businessResponse.setStatus("SUCCESS");
-            businessResponse.setResponse(responseProductKeyValues);
+            businessResponse.setResponse(responseProductKeyValuePair);
         } catch (Exception exception) {
             businessResponse.setCode(500);
             businessResponse.setStatus("FAILURE");
@@ -55,10 +55,10 @@ public class ProductKeyValueController {
     @GetMapping("/get/primary/{id}")
     public BusinessResponse getByPrimaryUserId(@PathVariable("id") String id) {
         BusinessResponse businessResponse = new BusinessResponse();
-        List<ProductKeyValues> ProductKeyValuesResponse = ProductKeyValuesService.getPrimaryUserId(id);
+        List<ProductKeyValuePair> productKeyValuePairResponse = ProductKeyValuesService.getPrimaryUserId(id);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
-        businessResponse.setResponse(ProductKeyValuesResponse);
+        businessResponse.setResponse(productKeyValuePairResponse);
         return businessResponse;
     }
 
