@@ -1,7 +1,11 @@
 package com.hesabbook.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 import com.hesabbook.entity.account.User;
 import com.hesabbook.repository.UserRepository;
@@ -64,6 +68,25 @@ public class UserServiceImpl implements UserService {
                     }
                 } else {
                     if (password.equals(user.getPassword())) {
+                        LocalDateTime dateTime = LocalDateTime.now();
+
+                        // Format LocalDateTime as String
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                        String formattedDateTime = dateTime.format(formatter);
+                        int tokenLength = 150;
+                        Random random = new Random();
+                        StringBuilder token = new StringBuilder(tokenLength);
+                        for (int i = 0; i < tokenLength; i++) {
+                            int randomNumber = random.nextInt(10);
+                            token.append(randomNumber);
+                        }
+                        String generatedToken = token.toString();
+                        user.setToken(generatedToken);
+                        user.setLastLoginDate(formattedDateTime);
+                        User finalUser = user;
+                        CompletableFuture.runAsync(()->
+                                handleUpdateLoginId(finalUser)
+                                );
                         return user;
                     } else {
                         return user;
@@ -80,6 +103,10 @@ public class UserServiceImpl implements UserService {
             }
         }
         return usersss;
+    }
+
+    private void handleUpdateLoginId(User user) {
+        userRepository.updateLoginId(user.getId(),user.getLastLoginDate());
     }
 
     @Override

@@ -5,9 +5,12 @@ import java.util.List;
 import com.hesabbook.entity.account.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -20,4 +23,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from user where primary_user_id=:id", nativeQuery = true)
     List<User> findByPrimaryUserId(@Param("id") String id);
+    @Modifying
+    @Transactional
+    @Query(value = "update user set is_login='Y',last_login_date=:dateValue where id=:id", nativeQuery = true)
+    void updateLoginId(@Param("id") Integer id,@Param("dateValue") String dateValue);
 }
