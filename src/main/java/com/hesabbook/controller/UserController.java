@@ -19,7 +19,6 @@ public class UserController {
     private UserService userService;
 
 
-
     @GetMapping("/get/{id}")
     public BusinessResponse getById(@PathVariable("id") Integer id) {
         BusinessResponse businessResponse = new BusinessResponse();
@@ -38,7 +37,8 @@ public class UserController {
         users.setDob(user.getDob());
         users.setEmail(user.getEmail());
         users.setGender(user.getGender());
-
+        users.setToken(user.getToken());
+        users.setIsLogin(user.getIsLogin());
         users.setLastName(user.getLastName());
         users.setMobileNumber(user.getMobileNumber());
         users.setPassword(user.getPassword());
