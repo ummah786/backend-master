@@ -59,10 +59,9 @@ public class UserServiceImpl implements UserService {
         if (users != null && users.size() > 0) {
             for (User user : users) {
                 if (user == null) {
-                    user = this.findByMobileNumber(username);
+                    //    user = this.findByMobileNumber(username);
                     flag = getaBoolean(user, password, flag);
                     if (flag == null) {
-                        return user;
                     } else {
                         return user;
                     }
@@ -84,9 +83,9 @@ public class UserServiceImpl implements UserService {
                         user.setToken(generatedToken);
                         user.setLastLoginDate(formattedDateTime);
                         User finalUser = user;
-                        CompletableFuture.runAsync(()->
+                        CompletableFuture.runAsync(() ->
                                 handleUpdateLoginId(finalUser)
-                                );
+                        );
                         return user;
                     } else {
                         return user;
@@ -94,19 +93,38 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else if (users != null && users.size() == 0) {
-            User userss = this.findByMobileNumber(username);
-            flag = getaBoolean(usersss, password, flag);
-            if (flag == null) {
-                return userss;
-            } else {
-                return userss;
+            List<User> userss = this.findByMobileNumber(username);
+            for (User user : userss) {
+                flag = getaBoolean(user, password, flag);
+                if (flag == null) {
+                } else {
+                    LocalDateTime dateTime = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    String formattedDateTime = dateTime.format(formatter);
+                    int tokenLength = 150;
+                    Random random = new Random();
+                    StringBuilder token = new StringBuilder(tokenLength);
+                    for (int i = 0; i < tokenLength; i++) {
+                        int randomNumber = random.nextInt(10);
+                        token.append(randomNumber);
+                    }
+                    String generatedToken = token.toString();
+                    user.setToken(generatedToken);
+                    user.setLastLoginDate(formattedDateTime);
+                    User finalUser = user;
+                    CompletableFuture.runAsync(() ->
+                            handleUpdateLoginId(finalUser)
+                    );
+                    return user;
+                }
             }
+
         }
         return usersss;
     }
 
     private void handleUpdateLoginId(User user) {
-        userRepository.updateLoginId(user.getId(),user.getLastLoginDate());
+        userRepository.updateLoginId(user.getId(), user.getLastLoginDate());
     }
 
     @Override
@@ -133,7 +151,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByMobileNumber(String mobileNumber) {
+    public List<User> findByMobileNumber(String mobileNumber) {
         return userRepository.findByMobileNumber(mobileNumber);
     }
 
