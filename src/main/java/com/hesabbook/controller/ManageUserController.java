@@ -2,6 +2,7 @@ package com.hesabbook.controller;
 
 import java.util.List;
 
+import com.hesabbook.entity.account.AccountDetails;
 import com.hesabbook.entity.account.ManageUsers;
 import com.hesabbook.service.account.ManageUserService;
 import com.hesabbook.utils.BusinessResponse;
@@ -21,18 +22,34 @@ public class ManageUserController {
     private ManageUserService manageUserService;
 
     @GetMapping("/all")
-    public List<ManageUsers> getAllMangeUser() {
-        return manageUserService.findAll();
+    public BusinessResponse getAllMangeUser() {
+        BusinessResponse businessResponse = new BusinessResponse();
+         List<ManageUsers> manageUsersList=       manageUserService.findAll();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(manageUsersList);
+        return businessResponse;
     }
 
     @GetMapping("/all/{id}")
-    public List<ManageUsers> findByPrimaryUserId(@PathVariable("id") String id) {
-        return manageUserService.findByPrimaryUserId(id);
+    public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
+
+        BusinessResponse businessResponse = new BusinessResponse();
+        List<ManageUsers> manageUsersList=       manageUserService.findByPrimaryUserId(id);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(manageUsersList);
+        return businessResponse;
     }
 
     @PostMapping("/save")
-    public ManageUsers saveManageUser(@RequestBody ManageUsers manageUsers) {
-        return manageUserService.save(manageUsers);
+    public BusinessResponse saveManageUser(@RequestBody ManageUsers manageUsers) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        ManageUsers accountDetailResponse = manageUserService.save(manageUsers);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(accountDetailResponse);
+        return businessResponse;
     }
 
     @PostMapping("/delete/{id}")
