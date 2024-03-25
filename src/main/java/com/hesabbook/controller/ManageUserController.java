@@ -2,7 +2,6 @@ package com.hesabbook.controller;
 
 import java.util.List;
 
-import com.hesabbook.entity.account.AccountDetails;
 import com.hesabbook.entity.account.ManageUsers;
 import com.hesabbook.service.account.ManageUserService;
 import com.hesabbook.utils.BusinessResponse;
@@ -24,7 +23,7 @@ public class ManageUserController {
     @GetMapping("/all")
     public BusinessResponse getAllMangeUser() {
         BusinessResponse businessResponse = new BusinessResponse();
-         List<ManageUsers> manageUsersList=       manageUserService.findAll();
+        List<ManageUsers> manageUsersList = manageUserService.findAll();
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(manageUsersList);
@@ -35,7 +34,7 @@ public class ManageUserController {
     public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
 
         BusinessResponse businessResponse = new BusinessResponse();
-        List<ManageUsers> manageUsersList=       manageUserService.findByPrimaryUserId(id);
+        List<ManageUsers> manageUsersList = manageUserService.findByPrimaryUserId(id);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(manageUsersList);
