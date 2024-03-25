@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +40,14 @@ public class HesabbookApplication {
     private UserService userService;
     @Autowired
     private UserServiceImpl userServiceimpl;
+
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
+    @MessageMapping("/message")
+    public void handleIncomingMessage(@Payload String message) {
+        messagingTemplate.convertAndSend("/topic/messages", message);
+    }
 
     @PostMapping("/login")
     public BusinessResponse login(@RequestBody User user) {
