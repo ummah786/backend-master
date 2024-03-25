@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,9 +45,16 @@ public class HesabbookApplication {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+    @PostMapping("/offer")
+    public Object handleOffer(@RequestBody Object offer) {
+        // Handle offer from client and return answer
+        return new Object(); // Return an answer
+    }
+
     @MessageMapping("/message")
-    public void handleIncomingMessage(@Payload String message) {
-        messagingTemplate.convertAndSend("/topic/messages", message);
+    @SendTo("/topic/messages")
+    public String handleMessage(@Payload String message) {
+        return message;
     }
 
     @PostMapping("/login")
