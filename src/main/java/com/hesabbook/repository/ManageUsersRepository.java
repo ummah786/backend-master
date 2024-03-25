@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ManageUsersRepository extends JpaRepository<ManageUsers, Integer> {
-    @Query(value = "select * from partner where primary_user_id=:id", nativeQuery = true)
+    @Query(value = "select * from manage_users where primary_user_id=:id", nativeQuery = true)
     List<ManageUsers> findByPrimaryUserId(@Param("id") String id);
 
     @Query(value = "select * from manage_users where secondary_user_id=:id", nativeQuery = true)
