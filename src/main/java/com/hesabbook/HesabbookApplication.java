@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -45,16 +46,18 @@ public class HesabbookApplication {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @PostMapping("/offer")
-    public Object handleOffer(@RequestBody Object offer) {
-        // Handle offer from client and return answer
-        return new Object(); // Return an answer
+    @GetMapping("/generate-offer")
+    public ResponseEntity<?> generateOffer() {
+        // Generate offer and return it
+        // Example: Offer offer = ...;
+        // return ResponseEntity.ok().body(offer);
+        return ResponseEntity.ok().build();
     }
 
-    @MessageMapping("/message")
-    @SendTo("/topic/messages")
-    public String handleMessage(@Payload String message) {
-        return message;
+    @PostMapping("/send-answer")
+    public ResponseEntity<?> sendAnswer(@RequestBody Object answer) {
+        // Process received answer
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
