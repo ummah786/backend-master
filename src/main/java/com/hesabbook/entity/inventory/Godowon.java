@@ -30,6 +30,7 @@ public class Godowon implements Serializable {
     private String zipCode;
     private String notes;
     private String date;
+    private String city;
     private String primary_user_id;
     private String secondary_user_id;
 }
