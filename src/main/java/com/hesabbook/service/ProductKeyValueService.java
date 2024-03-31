@@ -30,6 +30,7 @@ public class ProductKeyValueService {
         Optional<ProductKeyValuePair> AccountDetailsOptional = productKeyValuesRepository.findById(id);
         return AccountDetailsOptional.orElse(null);
     }
+
     public List<ProductKeyValuePair> findAll() {
         return productKeyValuesRepository.findAll();
     }
@@ -41,18 +42,21 @@ public class ProductKeyValueService {
     public List<String> getCategory(String id) {
         return productKeyValuesRepository.findByKeyCategory(id);
     }
+
     public List<String> getCompany(String id) {
         return productKeyValuesRepository.findByKeyCompany(id);
     }
+
     public List<String> getRackKey(String id) {
         return productKeyValuesRepository.findByRackKey(id);
     }
+
     public List<String> getWareHouse(String id) {
         return productKeyValuesRepository.findByKeyWareHouse(id);
     }
+
     public List<String> getBusinessName(String id) {
-        return productKeyValuesRepository.findByBusinessName();
-                //findByBusinessName(id);
+        return productKeyValuesRepository.findByBusinessName(id);
     }
 
 }
