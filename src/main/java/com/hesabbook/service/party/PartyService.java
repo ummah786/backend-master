@@ -8,8 +8,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.hesabbook.batch.BatchUpdate;
+import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.entity.party.Partner;
 import com.hesabbook.repository.PartnerRepository;
+import com.hesabbook.service.ProductKeyValueService;
 import com.hesabbook.utils.BusinessResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,16 @@ public class PartyService {
     private PartnerRepository partnerRepository;
     @Autowired
     private BatchUpdate batchUpdate;
+    @Autowired
+    private ProductKeyValueService productKeyValueService;
 
     public Partner save(Partner entity) {
+        ProductKeyValuePair productkeyValuePair = new ProductKeyValuePair();
+        productkeyValuePair.setKes("company");
+        productkeyValuePair.setValue(entity.getCompany());
+        productkeyValuePair.setPrimary_user_id(entity.getPrimary_user_id());
+        productkeyValuePair.setSecondary_user_id(entity.getSecondary_user_id());
+        productKeyValueService.save(productkeyValuePair);
         return partnerRepository.save(entity);
     }
 
