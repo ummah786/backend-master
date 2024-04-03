@@ -111,4 +111,12 @@ public class ProductKeyValueController {
         businessResponse.setResponse(ProductKeyValuesResponse);
         return businessResponse;
     }
+    @GetMapping("/delete/{id}")
+    public BusinessResponse deleteById(@PathVariable("id") Integer id) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        ProductKeyValuesService.delete(id);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        return businessResponse;
+    }
 }
