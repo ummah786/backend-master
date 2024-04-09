@@ -91,14 +91,17 @@ public class HesabbookApplication {
         return userResponse;
     }
 
-    @Bean
+    @Bean(name="corsFilter")
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("*");
+       // config.addAllowedOrigin("*");
         config.addAllowedMethod("*");
+        config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
+        config.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
+
 }
