@@ -19,24 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExpenseController {
     @Autowired
     private ExpenseService expenseService;
-
-    /*    @PostMapping("/upload")
-        public BusinessResponse uploadExcel(@RequestBody List<LinkedHashMap<String, String>> linkedHashMap) throws IOException {
-            BusinessResponse businessResponse = expenseService.saveBulk(linkedHashMap);
-            return businessResponse;
-        }
-
-        @GetMapping("/all")
-        public BusinessResponse getAllMangeUser() {
-            BusinessResponse businessResponse = new BusinessResponse();
-            List<Inventory> accountDetailResponse = expenseService.findAll();
-            businessResponse.setCode(200);
-            businessResponse.setStatus("SUCCESS");
-            businessResponse.setResponse(accountDetailResponse);
-            return businessResponse;
-        }
-
-      */
     @GetMapping("/all/{id}")
     public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
         BusinessResponse businessResponse = new BusinessResponse();
