@@ -12,7 +12,7 @@ public class ExpenseItems {
     private String itemName;
     private String quantity;
     private String rate;
-    private double total;
+    private Double total;
     private String primary_user_id;
     private String secondary_user_id;
 }
