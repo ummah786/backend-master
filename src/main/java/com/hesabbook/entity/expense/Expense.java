@@ -28,7 +28,7 @@ public class Expense implements Serializable {
     private Integer id;
     private String expenseId;
     private String expenseDate;
-    private Date lastModifiedDate;
+    private String lastModifiedDate;
     private String paymentMode;
     private String expenseType;
     private String note;
@@ -36,11 +36,10 @@ public class Expense implements Serializable {
     private String expenseItemsList;
     private String primary_user_id;
     private String secondary_user_id;
-
-    @PrePersist
+  /*  @PrePersist
     public void prePersist() {
         this.lastModifiedDate = new Date();
-    }
+    }*/
     /*@OneToMany
     private List<ExpenseItems> expenseItemsList;*/
 }
