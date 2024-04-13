@@ -13,6 +13,4 @@ public class ExpenseItems {
     private String quantity;
     private String rate;
     private Double total;
-    private String primary_user_id;
-    private String secondary_user_id;
 }
