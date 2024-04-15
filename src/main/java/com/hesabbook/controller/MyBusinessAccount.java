@@ -50,7 +50,6 @@ public class MyBusinessAccount {
         businessResponse.setResponse(accountDetailResponse);
         return businessResponse;
     }
-
     @PostMapping("/delete/{id}")
     public BusinessResponse deleteManageUser(@PathVariable("id") Integer id) {
         BusinessResponse businessResponse = new BusinessResponse();
