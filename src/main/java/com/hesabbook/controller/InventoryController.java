@@ -39,6 +39,7 @@ public class InventoryController {
         return businessResponse;
     }
 
+
     @GetMapping("/all/{id}")
     public BusinessResponse findByPrimaryUserId(@PathVariable("id") Integer id) {
         BusinessResponse businessResponse = new BusinessResponse();
