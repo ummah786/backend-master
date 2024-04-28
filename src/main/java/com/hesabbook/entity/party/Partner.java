@@ -7,6 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hesabbook.entity.Address;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,7 +58,7 @@ public class Partner implements Serializable {
     private String company;
     private String primary_user_id;
     private String secondary_user_id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Address> multipleShippingAddress;
     private Date creationDateTime;
 

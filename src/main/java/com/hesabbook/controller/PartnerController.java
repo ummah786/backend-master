@@ -1,9 +1,12 @@
 package com.hesabbook.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
+import com.hesabbook.entity.Address;
 import com.hesabbook.entity.party.Partner;
 import com.hesabbook.service.party.PartyService;
 import com.hesabbook.utils.BusinessResponse;
@@ -57,6 +60,38 @@ public class PartnerController {
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(accountDetailResponse);
         return businessResponse;
+    }
+
+
+    @PostMapping({"/save/address", "/save/address/{addressId}"})
+    public BusinessResponse savePartnerAddress(@RequestBody Partner partner, @PathVariable(value = "addressId", required = false) Integer addressId) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        Partner accountDetailResponse = null;
+        if (checkForAddessInsertUpdate(partner)) {
+            accountDetailResponse = partyService.find(partner.getId());
+            List<Address> addresses = new ArrayList<>();
+            addresses.addAll(accountDetailResponse.getMultipleShippingAddress());
+            addresses.addAll(partner.getMultipleShippingAddress());
+            accountDetailResponse.setMultipleShippingAddress(addresses);
+            accountDetailResponse = partyService.save(accountDetailResponse);
+        }
+        if (addressId != null) {
+            partyService.savePartnerAddress(partner.getMultipleShippingAddress().get(0), addressId);
+            accountDetailResponse = partyService.find(partner.getId());
+        }
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(accountDetailResponse);
+        return businessResponse;
+    }
+
+    private boolean checkForAddessInsertUpdate(Partner partner) {
+        Optional<Address> addressOptional = partner.getMultipleShippingAddress().stream().filter(x -> x.getId() == null).findFirst();
+        if (addressOptional.isPresent()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @PostMapping("/delete/{id}")

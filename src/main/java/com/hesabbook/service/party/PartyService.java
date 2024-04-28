@@ -8,8 +8,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.hesabbook.batch.BatchUpdate;
+import com.hesabbook.entity.Address;
 import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.entity.party.Partner;
+import com.hesabbook.repository.AddressRepository;
 import com.hesabbook.repository.PartnerRepository;
 import com.hesabbook.service.ProductKeyValueService;
 import com.hesabbook.utils.BusinessResponse;
@@ -25,6 +27,9 @@ public class PartyService {
     private PartnerRepository partnerRepository;
     @Autowired
     private BatchUpdate batchUpdate;
+
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     private ProductKeyValueService productKeyValueService;
 
@@ -120,5 +125,17 @@ public class PartyService {
             }
         }
         return true;
+    }
+
+    public void savePartnerAddress(Address address, Integer addressId) {
+        Optional<Address> address1 = addressRepository.findById(addressId);
+        if (address1.isPresent()) {
+            Address address2 = address1.get();
+            address2.setAddress(address.getAddress());
+            address2.setCity(address.getCity());
+            address2.setZip(address.getZip());
+            address2.setState(address.getState());
+            addressRepository.save(address2);
+        }
     }
 }
