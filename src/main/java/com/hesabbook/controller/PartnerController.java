@@ -63,11 +63,20 @@ public class PartnerController {
     }
 
 
+    @PostMapping("/address/delete/{addressId}")
+    public BusinessResponse deletePartnerAddress(@PathVariable(value = "addressId", required = true) Integer addressId) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        partyService.deletePartnerAddress(addressId);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        return businessResponse;
+    }
+
     @PostMapping({"/save/address", "/save/address/{addressId}"})
     public BusinessResponse savePartnerAddress(@RequestBody Partner partner, @PathVariable(value = "addressId", required = false) Integer addressId) {
         BusinessResponse businessResponse = new BusinessResponse();
         Partner accountDetailResponse = null;
-        if (addressId==null) {
+        if (addressId == null) {
             accountDetailResponse = partyService.find(partner.getId());
             List<Address> addresses = new ArrayList<>();
             addresses.addAll(accountDetailResponse.getMultipleShippingAddress());

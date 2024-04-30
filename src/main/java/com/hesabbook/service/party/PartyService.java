@@ -138,4 +138,9 @@ public class PartyService {
             addressRepository.save(address2);
         }
     }
+
+
+    public void deletePartnerAddress( Integer addressId) {
+      addressRepository.deleteById(addressId);
+    }
 }
