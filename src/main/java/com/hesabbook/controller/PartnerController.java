@@ -67,7 +67,7 @@ public class PartnerController {
     public BusinessResponse savePartnerAddress(@RequestBody Partner partner, @PathVariable(value = "addressId", required = false) Integer addressId) {
         BusinessResponse businessResponse = new BusinessResponse();
         Partner accountDetailResponse = null;
-        if (checkForAddessInsertUpdate(partner)) {
+        if (addressId==null) {
             accountDetailResponse = partyService.find(partner.getId());
             List<Address> addresses = new ArrayList<>();
             addresses.addAll(accountDetailResponse.getMultipleShippingAddress());
