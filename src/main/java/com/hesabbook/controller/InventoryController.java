@@ -38,8 +38,6 @@ public class InventoryController {
         businessResponse.setResponse(accountDetailResponse);
         return businessResponse;
     }
-
-
     @GetMapping("/all/{id}")
     public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
         BusinessResponse businessResponse = new BusinessResponse();
