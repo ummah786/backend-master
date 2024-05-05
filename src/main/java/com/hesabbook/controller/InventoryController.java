@@ -41,9 +41,9 @@ public class InventoryController {
 
 
     @GetMapping("/all/{id}")
-    public BusinessResponse findByPrimaryUserId(@PathVariable("id") Integer id) {
+    public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
         BusinessResponse businessResponse = new BusinessResponse();
-        Inventory accountDetailResponse = inventoryService.find(id);
+        List<Inventory> accountDetailResponse = inventoryService.getPrimaryUserId(id);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(accountDetailResponse);
