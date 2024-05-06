@@ -20,6 +20,18 @@ public class SalePurchaseController {
     @Autowired
     private SalePurchaseService salePurchaseService;
 
+
+    @GetMapping("/all")
+    public BusinessResponse findAll() {
+        BusinessResponse businessResponse = new BusinessResponse();
+        List<SalePurchase> salePurchases = salePurchaseService.findALl();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(salePurchases);
+        return businessResponse;
+    }
+
+
     @GetMapping("/all/{id}")
     public BusinessResponse findByPrimaryUserId(@PathVariable("id") String id) {
         BusinessResponse businessResponse = new BusinessResponse();

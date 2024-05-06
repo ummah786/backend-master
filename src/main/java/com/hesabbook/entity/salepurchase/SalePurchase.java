@@ -32,6 +32,11 @@ public class SalePurchase {
     private String businessName;//1
     private String phoneNumber;//1
     private String note;//1
+    private String termAndCondition;
+    private String billAddress;
+    private String shipAddress;
+    private String phone;
+    private String gst;
     private String lastModifiedDate;//1
     private String userid;//1
     private String billType;//(Sale/Purcase....)//1
@@ -92,6 +97,9 @@ public class SalePurchase {
     private String paymentType;//IN OUT
     private String paymentNote;
     private String gson;
+
+    private byte[] logoImage;
+    private byte[] signatureImage;
 
     private String salesPurchase;//1
     private String totalAmountCharge;

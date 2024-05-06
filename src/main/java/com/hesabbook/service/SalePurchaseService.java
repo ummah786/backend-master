@@ -29,6 +29,10 @@ public class SalePurchaseService {
         salePurchaseRepository.deleteById(id);
     }
 
+
+    public List<SalePurchase> findALl() {
+        return salePurchaseRepository.findAll();
+    }
     public List<SalePurchase> findByPrimaryUserId(String id) {
         return salePurchaseRepository.findByPrimaryUserId(id);
     }
