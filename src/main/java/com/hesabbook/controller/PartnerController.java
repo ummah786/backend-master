@@ -26,9 +26,12 @@ public class PartnerController {
     @Autowired
     private PartyService partyService;
 
-    @PostMapping("/upload")
-    public BusinessResponse uploadExcel(@RequestBody List<LinkedHashMap<String, String>> linkedHashMap) throws IOException {
-        BusinessResponse businessResponse = partyService.saveBulk(linkedHashMap);
+    private String primary_user_id;
+    private String secondary_user_id;
+    @PostMapping("/upload/{primaryUserId}/{secondaryUserId}")
+    public BusinessResponse uploadExcel(@RequestBody List<LinkedHashMap<String, String>> linkedHashMap,
+                                        @PathVariable("primaryUserId") String primaryUserId,@PathVariable(value = "secondaryUserId", required = false) String secondaryUserId) throws IOException {
+        BusinessResponse businessResponse = partyService.saveBulk(linkedHashMap,primaryUserId,secondaryUserId);
         return businessResponse;
     }
 

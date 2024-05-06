@@ -23,9 +23,10 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
-    @PostMapping("/upload")
-    public BusinessResponse uploadExcel(@RequestBody List<LinkedHashMap<String, String>> linkedHashMap) throws IOException {
-        BusinessResponse businessResponse = inventoryService.saveBulk(linkedHashMap);
+    @PostMapping("/upload/{primaryUserId}/{secondaryUserId}")
+    public BusinessResponse uploadExcel(@RequestBody List<LinkedHashMap<String, String>> linkedHashMap,
+                                        @PathVariable("primaryUserId") String primaryUserId,@PathVariable(value = "secondaryUserId", required = false) String secondaryUserId) throws IOException {
+        BusinessResponse businessResponse = inventoryService.saveBulk(linkedHashMap,primaryUserId,secondaryUserId);
         return businessResponse;
     }
 

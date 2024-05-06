@@ -50,10 +50,10 @@ public class InventoryService {
     }
 
 
-    public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap) {
+    public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap, String primaryUserId, String secondaryUserId) {
         BusinessResponse businessResponse = new BusinessResponse();
         List<Inventory> Inventory = linkedHashMap.stream()
-                .map(this::mapToInventory)
+                .map(part->mapToInventory(part,primaryUserId,secondaryUserId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         List<Inventory> InventoryList = inventoryRepository.saveAllAndFlush(Inventory);
@@ -64,7 +64,7 @@ public class InventoryService {
     }
 
 
-    public Inventory mapToInventory(LinkedHashMap<String, String> linkedHashMap) {
+    public Inventory mapToInventory(LinkedHashMap<String, String> linkedHashMap, String primaryUserId, String secondaryUserId) {
         Inventory inventory = new Inventory();
         inventory.setItem(linkedHashMap.get("col0"));
         inventory.setItemCode(linkedHashMap.get("col1"));
@@ -92,8 +92,10 @@ public class InventoryService {
         inventory.setTotalStock(linkedHashMap.get("col23"));
         inventory.setUnitNo(linkedHashMap.get("col24"));
         inventory.setChallanNo(linkedHashMap.get("col25"));
-
         boolean flag = areAllFieldsNull(inventory);
+        inventory.setPrimary_user_id(primaryUserId);
+        inventory.setSecondary_user_id(secondaryUserId);
+
         if (!flag) {
             return inventory;
         } else {

@@ -73,10 +73,10 @@ public class PartyService {
     }
 
     @SneakyThrows
-    public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap) {
+    public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap, String primaryUserId, String secondaryUserId) {
         BusinessResponse businessResponse = new BusinessResponse();
         List<Partner> partner = linkedHashMap.stream()
-                .map(this::mapToPartner)
+                .map(part->mapToPartner(part,primaryUserId,secondaryUserId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -88,7 +88,7 @@ public class PartyService {
     }
 
 
-    public Partner mapToPartner(LinkedHashMap<String, String> linkedHashMap) {
+    public Partner mapToPartner(LinkedHashMap<String, String> linkedHashMap, String primaryUserId, String secondaryUserId) {
         Partner partner = new Partner();
         partner.setPName(linkedHashMap.get("col0"));
         partner.setMobileNumber(linkedHashMap.get("col1"));
@@ -104,6 +104,9 @@ public class PartyService {
         partner.setOpeningBalance(linkedHashMap.get("col11"));
         partner.setOpeningBalanceType(linkedHashMap.get("col12"));
         boolean flag = areAllFieldsNull(partner);
+        partner.setPrimary_user_id(primaryUserId);
+        partner.setSecondary_user_id(secondaryUserId);
+
         if (!flag) {
             return partner;
         } else {
