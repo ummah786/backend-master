@@ -1,14 +1,17 @@
 package com.hesabbook.service.inventory;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.entity.inventory.Inventory;
 import com.hesabbook.repository.InventoryRepository;
+import com.hesabbook.service.ProductKeyValueService;
 import com.hesabbook.utils.BusinessResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,26 @@ public class InventoryService {
     @Autowired
     InventoryRepository inventoryRepository;
 
+    @Autowired
+    ProductKeyValueService productKeyValueService;
+
+
     public Inventory save(Inventory accountDetails) {
+        List<ProductKeyValuePair> productKeyValuePairList = Arrays.asList(extracted("company", accountDetails.getCompanyName(), accountDetails),
+                extracted("category", accountDetails.getCategory(), accountDetails));
+        productKeyValueService.saveAll(productKeyValuePairList);
         return inventoryRepository.save(accountDetails);
+    }
+
+
+    private ProductKeyValuePair extracted(String company, String entity, Inventory entity1) {
+        ProductKeyValuePair productkeyValuePair = new ProductKeyValuePair();
+        productkeyValuePair.setKes(company);
+        productkeyValuePair.setValue(entity);
+        productkeyValuePair.setPrimary_user_id(entity1.getPrimary_user_id());
+        productkeyValuePair.setSecondary_user_id(entity1.getSecondary_user_id());
+        return productkeyValuePair;
+        //  productKeyValueService.save(productkeyValuePair);
     }
 
     public Inventory update(Inventory entity) {
@@ -53,7 +74,7 @@ public class InventoryService {
     public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap, String primaryUserId, String secondaryUserId) {
         BusinessResponse businessResponse = new BusinessResponse();
         List<Inventory> Inventory = linkedHashMap.stream()
-                .map(part->mapToInventory(part,primaryUserId,secondaryUserId))
+                .map(part -> mapToInventory(part, primaryUserId, secondaryUserId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         List<Inventory> InventoryList = inventoryRepository.saveAllAndFlush(Inventory);

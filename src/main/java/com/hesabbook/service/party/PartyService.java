@@ -1,6 +1,7 @@
 package com.hesabbook.service.party;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
@@ -34,13 +35,20 @@ public class PartyService {
     private ProductKeyValueService productKeyValueService;
 
     public Partner save(Partner entity) {
-        ProductKeyValuePair productkeyValuePair = new ProductKeyValuePair();
-        productkeyValuePair.setKes("company");
-        productkeyValuePair.setValue(entity.getCompany());
-        productkeyValuePair.setPrimary_user_id(entity.getPrimary_user_id());
-        productkeyValuePair.setSecondary_user_id(entity.getSecondary_user_id());
-        productKeyValueService.save(productkeyValuePair);
+        List<ProductKeyValuePair> productKeyValuePairList = Arrays.asList(extracted("company", entity.getCompany(), entity),
+                extracted("category", entity.getPartyCategory(), entity));
+        productKeyValueService.saveAll(productKeyValuePairList);
         return partnerRepository.save(entity);
+    }
+
+    private ProductKeyValuePair extracted(String company, String entity, Partner entity1) {
+        ProductKeyValuePair productkeyValuePair = new ProductKeyValuePair();
+        productkeyValuePair.setKes(company);
+        productkeyValuePair.setValue(entity);
+        productkeyValuePair.setPrimary_user_id(entity1.getPrimary_user_id());
+        productkeyValuePair.setSecondary_user_id(entity1.getSecondary_user_id());
+        return productkeyValuePair;
+        //  productKeyValueService.save(productkeyValuePair);
     }
 
     public Partner update(Partner entity) {
@@ -76,7 +84,7 @@ public class PartyService {
     public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap, String primaryUserId, String secondaryUserId) {
         BusinessResponse businessResponse = new BusinessResponse();
         List<Partner> partner = linkedHashMap.stream()
-                .map(part->mapToPartner(part,primaryUserId,secondaryUserId))
+                .map(part -> mapToPartner(part, primaryUserId, secondaryUserId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -143,7 +151,7 @@ public class PartyService {
     }
 
 
-    public void deletePartnerAddress( Integer addressId) {
-      addressRepository.deleteById(addressId);
+    public void deletePartnerAddress(Integer addressId) {
+        addressRepository.deleteById(addressId);
     }
 }

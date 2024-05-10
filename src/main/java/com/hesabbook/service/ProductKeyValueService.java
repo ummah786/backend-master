@@ -18,6 +18,12 @@ public class ProductKeyValueService {
         return productKeyValuesRepository.save(accountDetails);
     }
 
+    public void saveAll(List<ProductKeyValuePair> accountDetails) {
+         productKeyValuesRepository.saveAll(accountDetails);
+    }
+
+
+
     public void delete(ProductKeyValuePair entity) {
         productKeyValuesRepository.delete(entity);
     }
