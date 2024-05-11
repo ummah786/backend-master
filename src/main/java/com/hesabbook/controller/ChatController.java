@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class ChatController {
-
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public String greeting(String message) throws Exception {
+        return "Hello, " + message + "!";
+    }
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public Message sendMessage(Message message) {
