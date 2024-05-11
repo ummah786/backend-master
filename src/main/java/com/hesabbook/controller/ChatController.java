@@ -13,7 +13,7 @@ public class ChatController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public String greeting(String message) throws Exception {
-        return "Hello, " + message + "!";
+        return  message ;
     }
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
