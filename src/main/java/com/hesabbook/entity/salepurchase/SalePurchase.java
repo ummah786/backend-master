@@ -109,7 +109,7 @@ public class SalePurchase {
     private String salesPurchase;//1
     private String totalAmountCharge;
     @Transient
-    private List<SalesPurchaseList> salesPurchaseList;
+    private List<SalesPurchaseList> salesPurchaseLists;
     @Transient
     private String ledgerBalance;
 
