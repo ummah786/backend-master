@@ -1,12 +1,17 @@
 package com.hesabbook.entity.salepurchase;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+
+import com.hesabbook.entity.AddAdditionalCharge;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -25,8 +30,6 @@ public class SalePurchase {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
-
-
     private Integer id;//1
     private String markFullyPaid;
     private String businessName;//1
@@ -42,7 +45,6 @@ public class SalePurchase {
     private String billType;//(Sale/Purcase....)//1
     private String billingAddress;//1
     private String shippingAddress;
-    private String addAdditionalCharge;//1
     private String addDiscount;//1
     private String totalDiscount;//1
     private String totalTax;//1
@@ -52,6 +54,8 @@ public class SalePurchase {
     private String paidAmount;//1
     private String balanceAmount;//1
     private String paymentMode;
+    public String addAdditionalCharge;
+    private String extraTaxableAmount;
 
     private String partyName;
     private String partyMobile;
@@ -62,10 +66,11 @@ public class SalePurchase {
     private String status;
     //SaleInvoice//1
     private String salesInvoiceNo;//1
-    private String salesInvoiceDate;//1
+    // Date
+    private LocalDateTime salesInvoiceDate;//1
     private String saleOriginalInvoiceNo;//1
     private String salesPaymentTerms;//1
-    private String salesDueDate;
+    private LocalDateTime salesDueDate;
     //purchase invoice//1
     private String purchaseInvNo;//1
     private String purchaseInvDate;//1
@@ -104,7 +109,7 @@ public class SalePurchase {
     private String salesPurchase;//1
     private String totalAmountCharge;
     @Transient
-    private List<SalesPurchaseList> salesPurchaseLists;
+    private List<SalesPurchaseList> salesPurchaseList;
     @Transient
     private String ledgerBalance;
 
