@@ -66,6 +66,7 @@ public class SalePurchase {
     private String totalTableTax;
     private String totalTableAmount;
     //items
+    @Column(name = "items", columnDefinition = "JSON")
     private String items;
 
 
