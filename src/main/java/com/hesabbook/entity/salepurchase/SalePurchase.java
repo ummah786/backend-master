@@ -60,6 +60,8 @@ public class SalePurchase {
     private String markFullyPaid;
     private String amountReceived;
     private String balanceAmount;
+    private String paymentMode;
+
     private String totalTaxableAmount;   //without tax value
     private String totalGstRats;    //SGST@2.5 CGST@2.5  SGST@6  CGST@6  SGST@14 CGST@14
     //table total Values details
