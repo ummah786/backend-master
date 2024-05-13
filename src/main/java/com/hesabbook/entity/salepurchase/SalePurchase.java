@@ -54,6 +54,7 @@ public class SalePurchase {
     // details of bills
     private String addAdditionalCharges;
     private String addDiscount;
+    private String totalAmount;
     private String autoRoundOffValue;
     private String autoRoundOffMark;
     private String markFullyPaid;
@@ -69,12 +70,12 @@ public class SalePurchase {
     @Column(name = "items", columnDefinition = "JSON")
     private String items;
 
-
+    private String status;
 
     private String transactionNumber;
     private String transactionDate;
     private String originalTransactionNumber;
-    private String status;
+
     //SaleInvoice//1
     private String salesInvoiceNo;//1
     // Date
