@@ -1,6 +1,7 @@
 package com.hesabbook.entity.salepurchase;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -24,41 +27,48 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "sale_purchase")
 public class SalePurchase {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Integer id;//1
-    private String markFullyPaid;
-    private String businessName;//1
-    private String phoneNumber;//1
-    private String note;//1
-    private String termAndCondition;
-    private String billAddress;
-    private String shipAddress;
-    private String phone;
-    private String gst;
-    private String lastModifiedDate;//1
-    private String userid;//1
-    private String billType;//(Sale/Purcase....)//1
-    private String billingAddress;//1
-    private String shippingAddress;
-    private String addDiscount;//1
-    private String totalDiscount;//1
-    private String totalTax;//1
-    private String subtotalAmount;//1
-    private String subtotalTax;
-    private String subtotalDiscount;
-    private String paidAmount;//1
-    private String balanceAmount;//1
-    private String paymentMode;
-    public String addAdditionalCharge;
-    private String extraTaxableAmount;
-
+    //logo
+    @Lob
+    private byte[] logoImage;
+    @Lob
+    private byte[] signatureImage;
+    //Party Details
+    private String partyId;
     private String partyName;
-    private String partyMobile;
+    private String partyPhone;
+    private String partyBillingAddress;
+    private String partyShippingAddress;
+    private String partyGst;
+    //type of bill
+    private String billType;  //saleInvoice  //salePurchase...
+    //condition
+    private String addNote;
+    private String addTermsAndCondition;
+    // details of bills
+    private String addAdditionalCharges;
+    private String addDiscount;
+    private String autoRoundOffValue;
+    private String autoRoundOffMark;
+    private String markFullyPaid;
+    private String amountReceived;
+    private String balanceAmount;
+    private String totalTaxableAmount;   //without tax value
+    private String totalGstRats;    //SGST@2.5 CGST@2.5  SGST@6  CGST@6  SGST@14 CGST@14
+    //table total Values details
+    private String totalTableDiscount;
+    private String totalTableTax;
+    private String totalTableAmount;
+    //items
+    private String items;
+
+
 
     private String transactionNumber;
     private String transactionDate;
@@ -94,7 +104,6 @@ public class SalePurchase {
 
     private String debitNoteNo;
     private String debitNoteDate;
-
     //Payment IN/OUT
     private String amount;
     private String paymentDate;
@@ -102,12 +111,6 @@ public class SalePurchase {
     private String paymentType;//IN OUT
     private String paymentNote;
     private String gson;
-
-    private byte[] logoImage;
-    private byte[] signatureImage;
-
-    private String salesPurchase;//1
-    private String totalAmountCharge;
     @Transient
     private List<SalesPurchaseList> salesPurchaseLists;
     @Transient
@@ -119,5 +122,10 @@ public class SalePurchase {
 
     private String primary_user_id;
     private String secondary_user_id;
+    private Date creationDateTime;
+    @PrePersist
+    public void prePersist() {
+        this.creationDateTime = new Date();
+    }
 
 }

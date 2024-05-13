@@ -14,13 +14,7 @@ import lombok.Setter;
 @Setter
 @Data
 @NoArgsConstructor
-@Table
-@Entity
 public class AddAdditionalCharge {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Integer id;//1
     public String key;
     public String value;

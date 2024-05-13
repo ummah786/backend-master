@@ -17,11 +17,11 @@ public interface SalePurchaseRepository extends JpaRepository<SalePurchase, Inte
     @Query(value = "select * from sale_purchase where primary_user_id=:id", nativeQuery = true)
     List<SalePurchase> findByPrimaryUserId(@Param("id") String id);
 
-    @Transactional
+    /*@Transactional
     @Modifying
     @Query("UPDATE SalePurchase e SET e.balanceAmount = :balAmountUp , e.paidAmount=:paidAmountUp  WHERE e.id = :id")
     int updateAmount(@Param("balAmountUp") String balAmountUp, @Param("paidAmountUp") String paidAmountUp, @Param("id") Integer id);
-
+*/
 
 }
 
