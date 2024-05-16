@@ -28,9 +28,6 @@ public class ExpenseController {
         businessResponse.setResponse(accountDetailResponse);
         return businessResponse;
     }
-
-    // hello somaos
-
     @PostMapping("/save")
     public BusinessResponse saveManageUser(@RequestBody Expense expense) {
         BusinessResponse businessResponse = new BusinessResponse();
