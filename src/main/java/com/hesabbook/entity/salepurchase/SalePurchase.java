@@ -7,6 +7,8 @@ import java.util.Map;
 
 import com.hesabbook.entity.AddAdditionalCharge;
 
+import org.hibernate.annotations.Type;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -109,12 +111,14 @@ public class SalePurchase {
     private String debitNoteNo;
     private String debitNoteDate;
     //Payment IN/OUT
-    private String amount;
     private String paymentDate;
     private String paymentNumber;
     private String paymentType;//IN OUT
     private String paymentNote;
+    @Column(name = "gson", columnDefinition = "JSON")
     private String gson;
+    private String amountSettled;
+    private String invoiceAmount;
     @Transient
     private List<SalesPurchaseList> salesPurchaseLists;
     @Transient
