@@ -71,7 +71,7 @@ public class SalePurchase {
     private String totalTableTax;
     private String totalTableAmount;
     //items
-    @Column(name = "items", columnDefinition = "JSON")
+    @Column(name = "items", columnDefinition = "JSON",nullable = true)
     private String items;
 
     private String status;
@@ -115,8 +115,6 @@ public class SalePurchase {
     private String paymentNumber;
     private String paymentType;//IN OUT
     private String paymentNote;
-    @Column(name = "gson", columnDefinition = "JSON")
-    private String gson;
     private String amountSettled;
     private String invoiceAmount;
     @Transient
