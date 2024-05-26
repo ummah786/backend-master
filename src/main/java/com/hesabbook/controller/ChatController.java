@@ -1,6 +1,7 @@
 package com.hesabbook.controller;
 
 import com.hesabbook.dto.Message;
+import com.hesabbook.dto.SignalMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class ChatController {
     @Autowired
     SimpMessagingTemplate messagingTemplate;
- /*   @MessageMapping("/hello")
+  /* @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Message sendMessage(Message message) {
 
@@ -22,8 +23,8 @@ public class ChatController {
         //   messagingTemplate.convertAndSendToUser(recipientUserId, "/queue/messages", message);
 
         return message;
-    }*/
-
+    }
+*/
     @MessageMapping("/hello")
     public void sendMessageValue(Message message) {
         //  messagingTemplate.convertAndSendToUser(recipientUserId, "/topic/greetings", message);
@@ -39,5 +40,11 @@ public class ChatController {
         return signal.toString();
     }
 
+
+    @MessageMapping("/screen-share")
+    @SendTo("/topic/screen-share")
+    public SignalMessage handleScreenShare(SignalMessage message) {
+        return message; // Forward the message to all subscribers
+    }
 
 }

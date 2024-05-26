@@ -12,7 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 public class SignalingHandler extends TextWebSocketHandler {
 
-    private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+    private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -22,19 +22,15 @@ public class SignalingHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-        sessions.forEach((id, s) -> {
-            if (!id.equals(session.getId())) {
-                try {
-                    s.sendMessage(new TextMessage(payload));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        // Broadcast the message to all connected clients
+        for (WebSocketSession s : sessions.values()) {
+            if (!s.getId().equals(session.getId())) {
+                s.sendMessage(new TextMessage(payload));
             }
-        });
+        }
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         sessions.remove(session.getId());
-    }
-}
+    }}
