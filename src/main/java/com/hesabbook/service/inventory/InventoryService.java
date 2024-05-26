@@ -13,7 +13,9 @@ import com.hesabbook.entity.inventory.Inventory;
 import com.hesabbook.repository.InventoryRepository;
 import com.hesabbook.service.ProductKeyValueService;
 import com.hesabbook.utils.BusinessResponse;
+import com.hesabbook.utils.CommonUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +30,29 @@ public class InventoryService {
 
 
     public Inventory save(Inventory accountDetails) {
-        List<ProductKeyValuePair> productKeyValuePairList = Arrays.asList(extracted("company", accountDetails.getCompanyName(), accountDetails),
-                extracted("category", accountDetails.getCategory(), accountDetails));
+        if (accountDetails != null) {
+            String gstTax = accountDetails.getGst();
+            String salePriceTaxType = accountDetails.getSalePriceTax();
+            if (salePriceTaxType != null && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
+                if (gstTax != null && !gstTax.isBlank()) {
+                    int gstNumber = Integer.parseInt(gstTax);
+                    String salePriceValue = accountDetails.getSalePrice();
+                    if (salePriceValue != null && !salePriceValue.isBlank()) {
+                        double salePriceValueDouble = Double.parseDouble(salePriceValue);
+                        double actualSalePrice = salePriceValueDouble - (salePriceValueDouble * gstNumber / 100);
+                        accountDetails.setSalePrice(String.valueOf(actualSalePrice));
+                    }
+                }
+            }
+        }
+        List<ProductKeyValuePair> productKeyValuePairList = List.of(
+                extracted("company", accountDetails.getCompanyName(), accountDetails),
+                extracted("category", accountDetails.getCategory(), accountDetails)
+        );
         productKeyValueService.saveAll(productKeyValuePairList);
+
         return inventoryRepository.save(accountDetails);
     }
-
 
     private ProductKeyValuePair extracted(String company, String entity, Inventory entity1) {
         ProductKeyValuePair productkeyValuePair = new ProductKeyValuePair();

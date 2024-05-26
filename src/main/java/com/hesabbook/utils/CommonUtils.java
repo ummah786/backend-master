@@ -23,4 +23,6 @@ public class CommonUtils implements Serializable {
     public static final String FULL_PAID = "Paid";
     public static final String UN_PAID = "Un Paid";
     public static final String PARTIAL_PAID = "Partial Paid";
+    public static final String WITH_TAX="With Tax";
+    public static final String WITH_OUT_TAX="Without Tax";
 }
