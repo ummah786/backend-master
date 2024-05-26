@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.hesabbook.entity.inventory.Inventory;
 import com.hesabbook.entity.party.Partner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class BatchUpdate {
                     preparedStatement.setString(6, entity.getCreditPeriodType());
                     preparedStatement.setString(7, entity.getEmail());
                     preparedStatement.setString(8, entity.getGstNumber());
-                    preparedStatement.setString(9, entity.getLoyality());
+                    preparedStatement.setString(9, entity.getLoyalty());
                     preparedStatement.setString(10, entity.getMobileNumber());
                     preparedStatement.setString(11, entity.getOpeningBalance());
                     preparedStatement.setString(12, entity.getOpeningBalanceType());

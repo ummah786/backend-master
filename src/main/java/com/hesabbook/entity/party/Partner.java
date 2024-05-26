@@ -55,7 +55,10 @@ public class Partner implements Serializable {
     private String creditPeriod;
     private String creditLimit;  //show
     private String creditPeriodType;
-    private String loyality;
+    private String loyalty;
+    private String enableSharingToCA;
+    private String shareGSTR1;
+    private String shareGSTR2;
     private String company;
     private String primary_user_id;
     private String secondary_user_id;
