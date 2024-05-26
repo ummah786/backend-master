@@ -1,11 +1,9 @@
 package com.hesabbook.service.inventory;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.hesabbook.entity.ProductKeyValuePair;
@@ -22,22 +20,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class InventoryService {
 
-    @Autowired
-    InventoryRepository inventoryRepository;
+    private final InventoryRepository inventoryRepository;
+    private final ProductKeyValueService productKeyValueService;
 
     @Autowired
-    ProductKeyValueService productKeyValueService;
-
+    public InventoryService(InventoryRepository inventoryRepository, ProductKeyValueService productKeyValueService) {
+        this.inventoryRepository = inventoryRepository;
+        this.productKeyValueService = productKeyValueService;
+    }
 
     public Inventory save(Inventory accountDetails) {
-        if (accountDetails != null) {
+        if (Objects.nonNull(accountDetails)) {
             String gstTax = accountDetails.getGst();
             String salePriceTaxType = accountDetails.getSalePriceTax();
-            if (salePriceTaxType != null && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
-                if (gstTax != null && !gstTax.isBlank()) {
+
+            if (StringUtils.isNotBlank(salePriceTaxType) && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
+                if (StringUtils.isNotBlank(gstTax)) {
                     int gstNumber = Integer.parseInt(gstTax);
                     String salePriceValue = accountDetails.getSalePrice();
-                    if (salePriceValue != null && !salePriceValue.isBlank()) {
+
+                    if (StringUtils.isNotBlank(salePriceValue)) {
                         double salePriceValueDouble = Double.parseDouble(salePriceValue);
                         double actualSalePrice = salePriceValueDouble - (salePriceValueDouble * gstNumber / 100);
                         accountDetails.setSalePrice(String.valueOf(actualSalePrice));
@@ -45,6 +47,7 @@ public class InventoryService {
                 }
             }
         }
+
         List<ProductKeyValuePair> productKeyValuePairList = List.of(
                 extracted("company", accountDetails.getCompanyName(), accountDetails),
                 extracted("category", accountDetails.getCategory(), accountDetails)
@@ -77,8 +80,7 @@ public class InventoryService {
     }
 
     public Inventory find(Integer id) {
-        Optional<Inventory> AccountDetailsOptional = inventoryRepository.findById(id);
-        return AccountDetailsOptional.orElse(null);
+        return inventoryRepository.findById(id).orElse(null);
     }
 
     public List<Inventory> findAll() {
@@ -89,20 +91,21 @@ public class InventoryService {
         return inventoryRepository.findByPrimaryUserId(id);
     }
 
-
     public BusinessResponse saveBulk(List<LinkedHashMap<String, String>> linkedHashMap, String primaryUserId, String secondaryUserId) {
-        BusinessResponse businessResponse = new BusinessResponse();
-        List<Inventory> Inventory = linkedHashMap.stream()
+        List<Inventory> inventories = linkedHashMap.stream()
                 .map(part -> mapToInventory(part, primaryUserId, secondaryUserId))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        List<Inventory> InventoryList = inventoryRepository.saveAllAndFlush(Inventory);
+
+        List<Inventory> savedInventories = inventoryRepository.saveAllAndFlush(inventories);
+
+        BusinessResponse businessResponse = new BusinessResponse();
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
-        businessResponse.setResponse(InventoryList);
+        businessResponse.setResponse(savedInventories);
+
         return businessResponse;
     }
-
 
     public Inventory mapToInventory(LinkedHashMap<String, String> linkedHashMap, String primaryUserId, String secondaryUserId) {
         Inventory inventory = new Inventory();
@@ -132,30 +135,24 @@ public class InventoryService {
         inventory.setTotalStock(linkedHashMap.get("col23"));
         inventory.setUnitNo(linkedHashMap.get("col24"));
         inventory.setChallanNo(linkedHashMap.get("col25"));
-        boolean flag = areAllFieldsNull(inventory);
         inventory.setPrimary_user_id(primaryUserId);
         inventory.setSecondary_user_id(secondaryUserId);
 
-        if (!flag) {
-            return inventory;
-        } else {
+        if (areAllFieldsNull(inventory)) {
             return null;
         }
+        return inventory;
     }
 
-    public boolean areAllFieldsNull(Inventory obj) {
-        Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            field.setAccessible(true);
-            try {
-                if (field.get(obj) != null) {
-                    return false;
-                }
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return true;
+    private boolean areAllFieldsNull(Inventory obj) {
+        return Arrays.stream(obj.getClass().getDeclaredFields())
+                .peek(field -> field.setAccessible(true))
+                .allMatch(field -> {
+                    try {
+                        return Objects.isNull(field.get(obj));
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }
