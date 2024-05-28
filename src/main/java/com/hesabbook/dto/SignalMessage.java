@@ -10,4 +10,7 @@ import lombok.Setter;
 public class SignalMessage {
     private String type;
     private String data;
+    private String from;
+    private String to;
+    private String signal;
 }

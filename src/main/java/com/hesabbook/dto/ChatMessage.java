@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ChatMessage {
+    private String from;
+    private String to;
     private String content;
-    private String sender;
-    private String receiver;
 }

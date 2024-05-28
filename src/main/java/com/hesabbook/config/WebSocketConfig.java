@@ -23,7 +23,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSoc
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket-example").setAllowedOriginPatterns("*")
+        registry.addEndpoint("/webrtc").setAllowedOriginPatterns("*")
                 .setHandshakeHandler(new DefaultHandshakeHandler())
                 .addInterceptors(new HttpSessionHandshakeInterceptor()).withSockJS();; // WebSocket endpoint for clients to connect to
     }
