@@ -35,6 +35,8 @@ public class ChatController {
     @MessageMapping("/sendMessage")
     public void sendMessage(ChatMessage chatMessage) {
         messagingTemplate.convertAndSendToUser(chatMessage.getTo(), "/topic/receiveMessage", chatMessage);
+        messagingTemplate.convertAndSend("/topic/receiveMessage", chatMessage);
+        messagingTemplate.convertAndSend("/user/topic/receiveMessage", chatMessage);
     }
 /*    @MessageMapping("/sendSignal")
     public void sendSignal(SignalMessage signalMessage) {
