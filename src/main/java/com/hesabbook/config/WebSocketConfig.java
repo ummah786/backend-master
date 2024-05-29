@@ -17,8 +17,11 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSocketConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic"); // Enable a simple in-memory message broker
-        config.setApplicationDestinationPrefixes("/app"); // Prefix for messages that are bound for methods annotated with @MessageMapping
+       /* config.enableSimpleBroker("/topic", "/queue");
+        config.setApplicationDestinationPrefixes("/app");
+        config.setUserDestinationPrefix("/user");*/
+      config.enableSimpleBroker("/topic"); // Enable a simple in-memory message broker
+    config.setApplicationDestinationPrefixes("/app"); // Prefix for messages that are bound for methods annotated with @MessageMapping
     }
 
     @Override
