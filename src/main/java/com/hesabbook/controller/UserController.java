@@ -29,6 +29,16 @@ public class UserController {
         return businessResponse;
     }
 
+    @GetMapping("/mobile/{id}")
+    public BusinessResponse getByMobileNumber(@PathVariable("id") String id) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        User userResponse = userService.findByMobileNumbers(id);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(userResponse);
+        return businessResponse;
+    }
+
     @PostMapping("/save")
     public BusinessResponse updateSave(@RequestBody User user) {
         BusinessResponse businessResponse = new BusinessResponse();

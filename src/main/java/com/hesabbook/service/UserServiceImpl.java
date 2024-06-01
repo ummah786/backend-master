@@ -154,6 +154,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findByMobileNumber(String mobileNumber) {
         return userRepository.findByMobileNumber(mobileNumber);
     }
+    public User findByMobileNumbers(String mobileNumber) {
+        return userRepository.findByMobileNumbers(mobileNumber);
+    }
 
     @Override
     public List<User> findByPrimaryUserId(String id) {

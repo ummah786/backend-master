@@ -18,4 +18,7 @@ public interface UserService extends GenericService<User> {
 
     List<User> findByPrimaryUserId(@Param("id") String id);
 
+
+
+   User findByMobileNumbers(String mobileNumber);
 }
