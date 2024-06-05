@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/bankaccounts")
+@RequestMapping("/hesabbook/bank/account")
 public class BankAccountController {
     @Autowired
     private BankAccountService bankAccountService;
