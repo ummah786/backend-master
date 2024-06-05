@@ -45,6 +45,6 @@ public class BankAccount implements Serializable {
     private String bankBranch;
     private String balance;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "bankAccount")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bankAccount")
     private List<Transaction> transactions;
 }
