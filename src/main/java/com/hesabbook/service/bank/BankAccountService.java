@@ -28,7 +28,7 @@ public class BankAccountService {
     }
 
     public BankAccount updateBankAccount(Long id, BankAccount bankAccountDetails) {
-        BankAccount bankAccount = bankAccountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BankAccount", "id", null));
+        BankAccount bankAccount = bankAccountRepository.findById(id).orElse( null);
         bankAccount.setAccountHolder(bankAccountDetails.getAccountHolder());
         bankAccount.setAccountName(bankAccountDetails.getAccountName());
         bankAccount.setAccountNumber(bankAccountDetails.getAccountNumber());
@@ -40,7 +40,7 @@ public class BankAccountService {
     }
 
     public void deleteBankAccount(Long id) {
-        BankAccount bankAccount = bankAccountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BankAccount", "id", null));
+        BankAccount bankAccount = bankAccountRepository.findById(id).orElse( null);
         bankAccountRepository.delete(bankAccount);
     }
 }

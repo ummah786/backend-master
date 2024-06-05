@@ -1,13 +1,10 @@
 package com.hesabbook.controller;
 
-import java.util.List;
-
 import com.hesabbook.entity.bank.BankAccount;
 import com.hesabbook.service.bank.BankAccountService;
+import com.hesabbook.utils.BusinessResponse;
 
-import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,30 +21,49 @@ public class BankAccountController {
     private BankAccountService bankAccountService;
 
     @GetMapping
-    public List<BankAccount> getAllBankAccounts() {
-        return bankAccountService.getAllBankAccounts();
+    public BusinessResponse getAllBankAccounts() {
+        BusinessResponse businessResponse = new BusinessResponse();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(bankAccountService.getAllBankAccounts());
+        return businessResponse;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BankAccount> getBankAccountById(@PathVariable Long id) {
-        BankAccount bankAccount = bankAccountService.getBankAccountById(id).orElseThrow(() -> new ResourceNotFoundException("BankAccount", "id", null));
-        return ResponseEntity.ok(bankAccount);
+    public BusinessResponse getBankAccountById(@PathVariable Long id) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(bankAccountService.getBankAccountById(id).orElse(null));
+        return businessResponse;
     }
 
     @PostMapping
-    public BankAccount createBankAccount(@RequestBody BankAccount bankAccount) {
-        return bankAccountService.createBankAccount(bankAccount);
+    public BusinessResponse createBankAccount(@RequestBody BankAccount bankAccount) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(bankAccountService.createBankAccount(bankAccount));
+        return businessResponse;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BankAccount> updateBankAccount(@PathVariable Long id, @RequestBody BankAccount bankAccountDetails) {
-        BankAccount updatedBankAccount = bankAccountService.updateBankAccount(id, bankAccountDetails);
-        return ResponseEntity.ok(updatedBankAccount);
+    public BusinessResponse updateBankAccount(@PathVariable Long id, @RequestBody BankAccount bankAccountDetails) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(bankAccountService.updateBankAccount(id, bankAccountDetails));
+        return businessResponse;
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBankAccount(@PathVariable Long id) {
+    public BusinessResponse deleteBankAccount(@PathVariable Long id) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
         bankAccountService.deleteBankAccount(id);
-        return ResponseEntity.noContent().build();
+        return businessResponse;
+
     }
 }
