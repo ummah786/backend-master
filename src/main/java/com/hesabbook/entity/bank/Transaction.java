@@ -43,8 +43,4 @@ public class Transaction implements Serializable {
     private String paid;
     private String received;
     private String balance;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_account_id")
-    private BankAccount bankAccount;
 }

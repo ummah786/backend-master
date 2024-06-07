@@ -5,6 +5,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -44,7 +48,6 @@ public class BankAccount implements Serializable {
     private String ifscCode;
     private String bankBranch;
     private String balance;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bankAccount")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 }
