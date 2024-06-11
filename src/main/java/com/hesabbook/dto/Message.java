@@ -1,5 +1,6 @@
 package com.hesabbook.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.Data;
@@ -13,5 +14,5 @@ public class Message {
     private String sender;
     private String receiver;
     private String content;
-    private Date time;
+    private LocalDateTime time;
 }
