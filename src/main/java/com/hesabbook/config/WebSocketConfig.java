@@ -33,7 +33,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer, WebSoc
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new SignalingHandler(), "/signaling")
+        registry.addHandler(new SignalingHandler(), "/socket.io")
                 .setAllowedOrigins("*");
     }
 
