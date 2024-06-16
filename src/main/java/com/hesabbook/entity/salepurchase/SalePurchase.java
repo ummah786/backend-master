@@ -3,11 +3,6 @@ package com.hesabbook.entity.salepurchase;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import com.hesabbook.entity.AddAdditionalCharge;
-
-import org.hibernate.annotations.Type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -79,37 +73,45 @@ public class SalePurchase {
     private String transactionNumber;
     private String transactionDate;
     private String originalTransactionNumber;
-
     //SaleInvoice//1
     private String salesInvoiceNo;//1
-    // Date
     private LocalDateTime salesInvoiceDate;//1
     private String saleOriginalInvoiceNo;//1
     private String salesPaymentTerms;//1
     private LocalDateTime salesDueDate;
     //purchase invoice//1
     private String purchaseInvNo;//1
-    private String purchaseInvDate;//1
+    private LocalDateTime purchaseInvDate;//1
     private String purchaseOriginalInvNo;//1
     private String PaymentTerms;//1
-    private String purchaseDueDate;
+    private LocalDateTime purchaseDueDate;
     //purchase order//1
     private String purchaseNo;//1
-    private String purchaseDate;//1
-    private String validDate;
+    private LocalDateTime purchaseDate;//1
+    private LocalDateTime validDate;
     //purchase Return//1
     private String purchaseReturnNo;//1
-    private String purchaseReturnDate;
-
+    private LocalDateTime purchaseReturnDate;
     //Sales Return//1
     private String salesReturnNo;//1
-    private String salesReturnDate;//1
-
+    private LocalDateTime salesReturnDate;//1
+    //Sales Quotation//1
+    private String quotationNo;//1
+    private LocalDateTime quotationDate;//1
+    //Sales Proforma //1
+    private String proformaNo;//1
+    private LocalDateTime proformaDate;//1
+    private LocalDateTime proformaExpireDate;
+    //Sales Delivery
+    private String deliveryNo;
+    private LocalDateTime deliveryDate;
+    private LocalDateTime deliveryDueDate;
+    //Credit Note
     private String creditNoteNo;
-    private String creditNoteDate;
-
+    private LocalDateTime creditNoteDate;
+    //Debit Note
     private String debitNoteNo;
-    private String debitNoteDate;
+    private LocalDateTime debitNoteDate;
     //Payment IN/OUT
     private String paymentDate;
     private String paymentNumber;
