@@ -114,7 +114,8 @@ public class SalePurchase {
     private LocalDateTime debitNoteDate;
     //Payment IN/OUT
     private String paymentDate;
-    private String paymentNumber;
+    private String paymentNumberIn;
+    private String paymentNumberOut;
     private String paymentType;//IN OUT
     private String paymentNote;
     private String amountSettled;
