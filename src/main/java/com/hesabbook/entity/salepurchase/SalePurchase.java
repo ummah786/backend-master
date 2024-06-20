@@ -1,6 +1,5 @@
 package com.hesabbook.entity.salepurchase;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -75,44 +74,44 @@ public class SalePurchase {
     private String originalTransactionNumber;
     //SaleInvoice//1
     private String salesInvoiceNo;//1
-    private LocalDateTime salesInvoiceDate;//1
+    private Date salesInvoiceDate;//1
     private String saleOriginalInvoiceNo;//1
     private String salesPaymentTerms;//1
-    private LocalDateTime salesDueDate;
+    private Date salesDueDate;
     //purchase invoice//1
     private String purchaseInvNo;//1
-    private LocalDateTime purchaseInvDate;//1
+    private Date purchaseInvDate;//1
     private String purchaseOriginalInvNo;//1
     private String PaymentTerms;//1
-    private LocalDateTime purchaseDueDate;
+    private Date purchaseDueDate;
     //purchase order//1
     private String purchaseNo;//1
-    private LocalDateTime purchaseDate;//1
-    private LocalDateTime validDate;
+    private Date purchaseDate;//1
+    private Date validDate;
     //purchase Return//1
     private String purchaseReturnNo;//1
-    private LocalDateTime purchaseReturnDate;
+    private Date purchaseReturnDate;
     //Sales Return//1
     private String salesReturnNo;//1
-    private LocalDateTime salesReturnDate;//1
+    private Date salesReturnDate;//1
     //Sales Quotation//1
     private String quotationNo;//1
-    private LocalDateTime quotationDueDate;
-    private LocalDateTime quotationDate;//1
+    private Date quotationDueDate;
+    private Date quotationDate;//1
     //Sales Proforma //1
     private String proformaNo;//1
-    private LocalDateTime proformaDate;//1
-    private LocalDateTime proformaExpireDate;
+    private Date proformaDate;//1
+    private Date proformaExpireDate;
     //Sales Delivery
     private String deliveryNo;
-    private LocalDateTime deliveryDate;
-    private LocalDateTime deliveryDueDate;
+    private Date deliveryDate;
+    private Date deliveryDueDate;
     //Credit Note
     private String creditNoteNo;
-    private LocalDateTime creditNoteDate;
+    private Date creditNoteDate;
     //Debit Note
     private String debitNoteNo;
-    private LocalDateTime debitNoteDate;
+    private Date debitNoteDate;
     //Payment IN/OUT
     private String paymentDate;
     private String paymentNumberIn;
