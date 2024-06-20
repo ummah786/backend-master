@@ -97,6 +97,7 @@ public class SalePurchase {
     private LocalDateTime salesReturnDate;//1
     //Sales Quotation//1
     private String quotationNo;//1
+    private LocalDateTime quotationDueDate;
     private LocalDateTime quotationDate;//1
     //Sales Proforma //1
     private String proformaNo;//1
