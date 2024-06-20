@@ -28,11 +28,30 @@ public class User {
 
     private String primary_user_id;
     private String secondary_user_id;
+
+
+
     private String isLogin;
     private String lastLoginDate;
+    private String businessId;
+    private String firstTimeLogin;
+    public String getFirstTimeLogin() {
+        return firstTimeLogin;
+    }
 
+    public void setFirstTimeLogin(String firstTimeLogin) {
+        this.firstTimeLogin = firstTimeLogin;
+    }
     public String getIsLogin() {
         return isLogin;
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 
     public void setIsLogin(String isLogin) {

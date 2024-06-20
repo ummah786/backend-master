@@ -87,6 +87,7 @@ public class HesabbookApplication {
             int randomData = random.nextInt(90000000) + 10000000;
             user.setPrimary_user_id(String.valueOf(randomData));
         }
+        user.setFirstTimeLogin("Y");
         User userResponse = userService.save(user);
         return userResponse;
     }
