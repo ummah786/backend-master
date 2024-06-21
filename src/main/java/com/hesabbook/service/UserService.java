@@ -21,4 +21,5 @@ public interface UserService extends GenericService<User> {
 
 
    User findByMobileNumbers(String mobileNumber);
+    User updateFirstTimeLogin(String id);
 }

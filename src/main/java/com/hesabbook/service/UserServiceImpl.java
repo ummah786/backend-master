@@ -154,6 +154,7 @@ public class UserServiceImpl implements UserService {
     public List<User> findByMobileNumber(String mobileNumber) {
         return userRepository.findByMobileNumber(mobileNumber);
     }
+
     public User findByMobileNumbers(String mobileNumber) {
         return userRepository.findByMobileNumbers(mobileNumber);
     }
@@ -166,6 +167,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteInBatch(List<User> users) {
         userRepository.deleteInBatch(users);
+    }
+
+
+    public User updateFirstTimeLogin(String id) {
+        userRepository.updateFirstTimeLogin(id);
+        return userRepository.findById(Integer.valueOf(id)).get();
     }
 
 }

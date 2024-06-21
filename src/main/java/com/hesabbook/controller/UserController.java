@@ -39,6 +39,16 @@ public class UserController {
         return businessResponse;
     }
 
+    @GetMapping("/update/first/time/{id}")
+    public BusinessResponse updateFirstTimeLogin(@PathVariable("id") String id) {
+        BusinessResponse businessResponse = new BusinessResponse();
+        User userResponse = userService.updateFirstTimeLogin(id);
+        businessResponse.setCode(200);
+        businessResponse.setStatus("SUCCESS");
+        businessResponse.setResponse(userResponse);
+        return businessResponse;
+    }
+
     @PostMapping("/save")
     public BusinessResponse updateSave(@RequestBody User user) {
         BusinessResponse businessResponse = new BusinessResponse();

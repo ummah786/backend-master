@@ -27,6 +27,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from user where mobile_number=:id", nativeQuery = true)
     User findByMobileNumbers(@Param("id") String id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update user set first_time_login='N',last_login_date=:dateValue where id=:id", nativeQuery = true)
+    void updateFirstTimeLogin(@Param("id") String id);
+
     @Modifying
     @Transactional
     @Query(value = "update user set is_login='Y',last_login_date=:dateValue where id=:id", nativeQuery = true)
