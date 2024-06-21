@@ -43,6 +43,11 @@ public class AccountDetails implements Serializable {
     private String logo;
     private String signature;
 
+    private String  billingRequirement;
+    private String businessSize;;
+    private String  foundBy;
+    private String  language;
+
     private String primary_user_id;
     private String secondary_user_id;
 }
