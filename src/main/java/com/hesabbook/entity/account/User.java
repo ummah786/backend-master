@@ -35,6 +35,16 @@ public class User {
     private String lastLoginDate;
     private String businessId;
     private String firstTimeLogin;
+
+    public String getPrimaryWithBusiness() {
+        return primaryWithBusiness;
+    }
+
+    public void setPrimaryWithBusiness(String primaryWithBusiness) {
+        this.primaryWithBusiness = primaryWithBusiness;
+    }
+
+    private String primaryWithBusiness;
     public String getFirstTimeLogin() {
         return firstTimeLogin;
     }

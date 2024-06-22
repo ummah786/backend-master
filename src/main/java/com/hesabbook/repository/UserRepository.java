@@ -16,6 +16,7 @@ import jakarta.transaction.Transactional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByEmail(String email);
+
     @Query(value = "select * from user where email=:email", nativeQuery = true)
     List<User> findByEmails(String email);
 
@@ -30,11 +31,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "update user set first_time_login='N',last_login_date=:dateValue where id=:id", nativeQuery = true)
-    void updateFirstTimeLogin(@Param("id") String id);
+    @Query(value = "update user set first_time_login='N' ,business_id=:businessId,primary_with_business=:primary where id=:id", nativeQuery = true)
+    void updateFirstTimeLogin(@Param("id") String id, String businessId, String primary);
 
     @Modifying
     @Transactional
-    @Query(value = "update user set is_login='Y',last_login_date=:dateValue where id=:id", nativeQuery = true)
-    void updateLoginId(@Param("id") Integer id,@Param("dateValue") String dateValue);
+    @Query(value = "update user set is_login='Y',last_login_date=:dateValue,token=:token where id=:id", nativeQuery = true)
+    void updateLoginId(@Param("id") Integer id, @Param("dateValue") String dateValue, String token);
 }

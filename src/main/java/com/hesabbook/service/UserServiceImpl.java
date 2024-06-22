@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void handleUpdateLoginId(User user) {
-        userRepository.updateLoginId(user.getId(), user.getLastLoginDate());
+        userRepository.updateLoginId(user.getId(), user.getLastLoginDate(),user.getToken());
     }
 
     @Override
@@ -170,8 +170,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public User updateFirstTimeLogin(String id) {
-        userRepository.updateFirstTimeLogin(id);
+    public User updateFirstTimeLogin(String id, String businessId, String primary) {
+        userRepository.updateFirstTimeLogin(id,businessId,primary);
         return userRepository.findById(Integer.valueOf(id)).get();
     }
 

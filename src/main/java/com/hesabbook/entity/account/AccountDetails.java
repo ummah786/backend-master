@@ -50,4 +50,6 @@ public class AccountDetails implements Serializable {
 
     private String primary_user_id;
     private String secondary_user_id;
+
+    private String primaryWithBusiness;
 }

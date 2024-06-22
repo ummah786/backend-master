@@ -39,10 +39,10 @@ public class UserController {
         return businessResponse;
     }
 
-    @GetMapping("/update/first/time/{id}")
-    public BusinessResponse updateFirstTimeLogin(@PathVariable("id") String id) {
+    @GetMapping("/update/first/time/{id}/{businessId}/{primary}")
+    public BusinessResponse updateFirstTimeLogin(@PathVariable("id") String id,@PathVariable("businessId") String  businessId ,@PathVariable("primary") String  primary ) {
         BusinessResponse businessResponse = new BusinessResponse();
-        User userResponse = userService.updateFirstTimeLogin(id);
+        User userResponse = userService.updateFirstTimeLogin(id,businessId,primary);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(userResponse);
