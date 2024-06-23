@@ -25,6 +25,7 @@ public class ManageUsers implements Serializable {
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Integer id;
     private String accountBusinessName;
+    private String businessId;
     private String name;
     private String mobileNumber;
     private String emailAddress;

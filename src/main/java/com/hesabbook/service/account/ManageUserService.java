@@ -52,6 +52,8 @@ public class ManageUserService {
         user.setRole(manageUsers.getRole());
         user.setSecondary_user_id(manageUsers.getSecondary_user_id());
         user.setTempPassword(manageUsers.getTempPassword());
+        user.setBusinessId(manageUsers.getBusinessId());
+        user.setPrimaryWithBusiness("Y");
         userService.save(user);
     }
 
