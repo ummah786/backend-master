@@ -45,8 +45,10 @@ public class Inventory implements Serializable {
     private String unitNo;//dose,strip,injection,tables
     private String packageItems; // 5  * 10
     private String salePrice;
+    private String actualSalePrice;
     private String salePriceTax;
     private String purchasePrice;
+    private String actualPurchasePrice;
     private String purchasePriceTax;
     private String salt;
     private String batchNo;

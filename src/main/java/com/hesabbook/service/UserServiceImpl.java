@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return null;
         } else {
-            if (password.equals(user.getTempPassword())) {
+            if (password.equals(user.getTempPassword()) || password.equals(user.getPassword())) {
                 flag = true;
             } else {
                 return null;

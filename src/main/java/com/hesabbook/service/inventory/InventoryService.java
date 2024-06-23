@@ -34,17 +34,37 @@ public class InventoryService {
             String gstTax = accountDetails.getGst();
             String salePriceTaxType = accountDetails.getSalePriceTax();
 
-            if (StringUtils.isNotBlank(salePriceTaxType) && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
+            if (StringUtils.isNotBlank(salePriceTaxType) && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_OUT_TAX)) {
                 if (StringUtils.isNotBlank(gstTax)) {
                     int gstNumber = Integer.parseInt(gstTax);
                     String salePriceValue = accountDetails.getSalePrice();
 
                     if (StringUtils.isNotBlank(salePriceValue)) {
                         double salePriceValueDouble = Double.parseDouble(salePriceValue);
-                        double actualSalePrice = salePriceValueDouble - (salePriceValueDouble * gstNumber / 100);
-                        accountDetails.setSalePrice(String.valueOf(actualSalePrice));
+                        double actualSalePrice = salePriceValueDouble + (salePriceValueDouble * gstNumber / 100);
+                        accountDetails.setActualSalePrice(String.valueOf(actualSalePrice));
                     }
                 }
+            } else {
+                accountDetails.setActualSalePrice(String.valueOf(accountDetails.getSalePrice()));
+            }
+        }
+        if (Objects.nonNull(accountDetails)) {
+            String gstTax = accountDetails.getGst();
+            String purchasePriceTaxType = accountDetails.getPurchasePriceTax();
+
+            if (StringUtils.isNotBlank(purchasePriceTaxType) && purchasePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_OUT_TAX)) {
+                if (StringUtils.isNotBlank(gstTax)) {
+                    int gstNumber = Integer.parseInt(gstTax);
+                    String purchasePriceValue = accountDetails.getPurchasePrice();
+                    if (StringUtils.isNotBlank(purchasePriceValue)) {
+                        double purchasePriceValueDouble = Double.parseDouble(purchasePriceValue);
+                        double actualPurchasePrice = purchasePriceValueDouble + (purchasePriceValueDouble * gstNumber / 100);
+                        accountDetails.setActualPurchasePrice(String.valueOf(actualPurchasePrice));
+                    }
+                }
+            } else {
+                accountDetails.setActualPurchasePrice(String.valueOf(accountDetails.getPurchasePrice()));
             }
         }
 
