@@ -40,9 +40,9 @@ public class UserController {
     }
 
     @GetMapping("/update/first/time/{id}/{businessId}/{primary}")
-    public BusinessResponse updateFirstTimeLogin(@PathVariable("id") String id,@PathVariable("businessId") String  businessId ,@PathVariable("primary") String  primary ) {
+    public BusinessResponse updateFirstTimeLogin(@PathVariable("id") String id, @PathVariable("businessId") String businessId, @PathVariable("primary") String primary) {
         BusinessResponse businessResponse = new BusinessResponse();
-        User userResponse = userService.updateFirstTimeLogin(id,businessId,primary);
+        User userResponse = userService.updateFirstTimeLogin(id, businessId, primary);
         businessResponse.setCode(200);
         businessResponse.setStatus("SUCCESS");
         businessResponse.setResponse(userResponse);
@@ -67,6 +67,11 @@ public class UserController {
         users.setFirstName(user.getFirstName());
         users.setPrimary_user_id(user.getPrimary_user_id());
         users.setSecondary_user_id(user.getSecondary_user_id());
+        users.setToken(user.getToken());
+        users.setIsLogin(user.getIsLogin());
+        users.setLastLoginDate(user.getLastLoginDate());
+        users.setBusinessId(user.getBusinessId());
+        users.setFirstTimeLogin(user.getFirstTimeLogin());
         try {
             User responseUser = userService.save(users);
             businessResponse.setCode(200);

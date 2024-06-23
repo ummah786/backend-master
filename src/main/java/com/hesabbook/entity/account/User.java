@@ -29,7 +29,7 @@ public class User {
     private String primary_user_id;
     private String secondary_user_id;
 
-
+    private String token;
 
     private String isLogin;
     private String lastLoginDate;
@@ -84,7 +84,7 @@ public class User {
         this.token = token;
     }
 
-    private String token;
+
 
     public String getPrimary_user_id() {
         return primary_user_id;

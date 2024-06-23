@@ -13,9 +13,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,9 +61,15 @@ public class HesabbookApplication {
     public BusinessResponse login(@RequestBody User user) {
         BusinessResponse businessResponse = new BusinessResponse();
         User userResponse = userServiceimpl.authenticate(user.getMobileNumber(), user.getTempPassword());
-        businessResponse.setCode(200);
-        businessResponse.setStatus("SUCCESS");
-        businessResponse.setResponse(userResponse);
+        if (userResponse.getId() != null && userResponse.getId() > 0) {
+            businessResponse.setCode(200);
+            businessResponse.setStatus("SUCCESS");
+            businessResponse.setResponse(userResponse);
+        } else {
+            businessResponse.setCode(500);
+            businessResponse.setStatus("FAILURE");
+            businessResponse.setResponse("Invalid Credential");
+        }
         return businessResponse;
     }
 
@@ -92,11 +95,11 @@ public class HesabbookApplication {
         return userResponse;
     }
 
-    @Bean(name="corsFilter")
+    @Bean(name = "corsFilter")
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-       // config.addAllowedOrigin("*");
+        // config.addAllowedOrigin("*");
         config.addAllowedMethod("*");
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
