@@ -33,26 +33,32 @@ public class InventoryService {
         if (Objects.nonNull(accountDetails)) {
             String gstTax = accountDetails.getGst();
             String salePriceTaxType = accountDetails.getSalePriceTax();
-
             if (StringUtils.isNotBlank(salePriceTaxType) && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_OUT_TAX)) {
                 if (StringUtils.isNotBlank(gstTax)) {
                     int gstNumber = Integer.parseInt(gstTax);
                     String salePriceValue = accountDetails.getSalePrice();
-
                     if (StringUtils.isNotBlank(salePriceValue)) {
                         double salePriceValueDouble = Double.parseDouble(salePriceValue);
                         double actualSalePrice = salePriceValueDouble + (salePriceValueDouble * gstNumber / 100);
                         accountDetails.setActualSalePrice(String.valueOf(actualSalePrice));
                     }
                 }
-            } else {
-                accountDetails.setActualSalePrice(String.valueOf(accountDetails.getSalePrice()));
+            } else if (StringUtils.isNotBlank(salePriceTaxType) && salePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
+                if (StringUtils.isNotBlank(gstTax)) {
+                    int gstNumber = Integer.parseInt(gstTax);
+                    String salePriceValue = accountDetails.getSalePrice();
+                    if (StringUtils.isNotBlank(salePriceValue)) {
+                        double salePriceValueDouble = Double.parseDouble(salePriceValue);
+                        double actualSalePrice = salePriceValueDouble / (1 + gstNumber / 100.0);
+                        accountDetails.setSalePrice(String.valueOf(actualSalePrice));
+                        accountDetails.setActualSalePrice(salePriceValue);
+                    }
+                }
             }
         }
         if (Objects.nonNull(accountDetails)) {
             String gstTax = accountDetails.getGst();
             String purchasePriceTaxType = accountDetails.getPurchasePriceTax();
-
             if (StringUtils.isNotBlank(purchasePriceTaxType) && purchasePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_OUT_TAX)) {
                 if (StringUtils.isNotBlank(gstTax)) {
                     int gstNumber = Integer.parseInt(gstTax);
@@ -63,11 +69,19 @@ public class InventoryService {
                         accountDetails.setActualPurchasePrice(String.valueOf(actualPurchasePrice));
                     }
                 }
-            } else {
-                accountDetails.setActualPurchasePrice(String.valueOf(accountDetails.getPurchasePrice()));
+            } else if (StringUtils.isNotBlank(purchasePriceTaxType) && purchasePriceTaxType.equalsIgnoreCase(CommonUtils.WITH_TAX)) {
+                if (StringUtils.isNotBlank(gstTax)) {
+                    int gstNumber = Integer.parseInt(gstTax);
+                    String purchasePriceValue = accountDetails.getPurchasePrice();
+                    if (StringUtils.isNotBlank(purchasePriceValue)) {
+                        double purchasePriceValueDouble = Double.parseDouble(purchasePriceValue);
+                        double actualPurchasePrice = purchasePriceValueDouble / (1 + gstNumber / 100.0);
+                        accountDetails.setPurchasePrice(String.valueOf(actualPurchasePrice));
+                        accountDetails.setActualPurchasePrice(purchasePriceValue);
+                    }
+                }
             }
         }
-
         List<ProductKeyValuePair> productKeyValuePairList = List.of(
                 extracted("company", accountDetails.getCompanyName(), accountDetails),
                 extracted("category", accountDetails.getCategory(), accountDetails)
