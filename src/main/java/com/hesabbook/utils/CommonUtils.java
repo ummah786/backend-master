@@ -10,19 +10,23 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommonUtils implements Serializable {
-    public static final String PURCHASE_ORDER = "Purchase Order";
-    public static final String PURCHASE_INVOICE = "Purchase Invoice";
-    public static final String PURCHASE_RETURN = "Purchase Return";
-    public static final String SALES_INVOICE = "Sales Invoice";
-    public static final String SALES_RETURN = "Sales Return";
-    public static final String PAYMENT_IN = "Payment In";
-    public static final String PAYMENT_OUT = "Payment Out";
-    public static final String CREDIT_NOTE = "Credit Note";
-    public static final String DEBIT_NOTE = "Debit Note";
+    public static final String PURCHASE_ORDER = "PURCHASE_ORDER";
+    public static final String PURCHASE_INVOICE = "PURCHASE_INVOICE";
+    public static final String PURCHASE_RETURN = "PURCHASE_RETURN";
+    public static final String SALES_INVOICE = "SALE_INVOICE";
+    public static final String SALES_RETURN = "SALE_RETURN";
+    public static final String PAYMENT_IN = "PAYMENT_IN";
+    public static final String PAYMENT_OUT = "PAYMENT_OUT";
+    public static final String CREDIT_NOTE = "CREATE_NOTE";
+    public static final String DEBIT_NOTE = "DEBIT_NOTE";
     public static final String ALL_TRANSACTION = "All Transaction";
     public static final String FULL_PAID = "Paid";
     public static final String UN_PAID = "Un Paid";
     public static final String PARTIAL_PAID = "Partial Paid";
     public static final String WITH_TAX="With Tax";
     public static final String WITH_OUT_TAX="Without Tax";
+
+
+    //   salePurchaseObject["billType"] = "DELIVERY_CHALLAN";,QUOTATION,PROFORMA_INVOICE,PAYMENT_IN
+    //  PAYMENT_OUT , DEBIT_NOTE PURCHASE_INVOICE PURCHASE_ORDER PURCHASE_RETURN CREATE_NOTE  DELIVERY_CHALLAN
 }

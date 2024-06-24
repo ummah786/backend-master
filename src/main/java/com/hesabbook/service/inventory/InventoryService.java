@@ -50,7 +50,7 @@ public class InventoryService {
                     if (StringUtils.isNotBlank(salePriceValue)) {
                         double salePriceValueDouble = Double.parseDouble(salePriceValue);
                         double actualSalePrice = salePriceValueDouble / (1 + gstNumber / 100.0);
-                        accountDetails.setSalePrice(String.valueOf(actualSalePrice));
+                        accountDetails.setSalePrice(String.format("%.2f", actualSalePrice));
                         accountDetails.setActualSalePrice(salePriceValue);
                     }
                 }
@@ -76,7 +76,7 @@ public class InventoryService {
                     if (StringUtils.isNotBlank(purchasePriceValue)) {
                         double purchasePriceValueDouble = Double.parseDouble(purchasePriceValue);
                         double actualPurchasePrice = purchasePriceValueDouble / (1 + gstNumber / 100.0);
-                        accountDetails.setPurchasePrice(String.valueOf(actualPurchasePrice));
+                        accountDetails.setPurchasePrice(String.format("%.2f", actualPurchasePrice));
                         accountDetails.setActualPurchasePrice(purchasePriceValue);
                     }
                 }

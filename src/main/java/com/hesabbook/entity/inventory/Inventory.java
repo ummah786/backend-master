@@ -32,18 +32,18 @@ public class Inventory implements Serializable {
     private Integer id;
     private String userName;
     private String item;
-    private String category;//create a new
-    private String companyName;//create a new
+    private String category; // create a new
+    private String companyName; // create a new
     private String itemCode;
-    private String barCodeValue; //create a new
+    private String barCodeValue; // create a new
     private String itemDescription;
     private String totalStock;
     private String lowStock;
     private String lowStockCheckBox;
-    private String rackNo;//create a new
+    private String rackNo; // create a new
     private String challanNo;
-    private String unitNo;//dose,strip,injection,tables
-    private String packageItems; // 5  * 10
+    private String unitNo; // dose, strip, injection, tablets
+    private String packageItems; // 5 * 10
     private String salePrice;
     private String actualSalePrice;
     private String salePriceTax;
@@ -75,6 +75,15 @@ public class Inventory implements Serializable {
     private String taxTable;
     @Transient
     private String amountTable;
+
+    // New Fields
+    @Transient
+    private Integer quantity;
+    @Transient
+    private Double discount;
+    @Transient
+    private Double total;
+
     @PrePersist
     public void prePersist() {
         this.creationDateTime = new Date();
