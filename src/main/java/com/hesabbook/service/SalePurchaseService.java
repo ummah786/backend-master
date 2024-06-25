@@ -63,15 +63,9 @@ public class SalePurchaseService {
             }
         }
         switch (salePurchase.getBillType()) {
-            case SALES_INVOICE ,DEBIT_NOTE,PURCHASE_RETURN-> {
-                updateItemQuantity(salePurchase, "Reduce");
-            }
-            case SALES_RETURN, CREDIT_NOTE,PURCHASE_INVOICE -> {
-                updateItemQuantity(salePurchase, "Increment");
-            }
-            case PURCHASE_ORDER ,DELIVERY_CHALLAN,QUOTATION,PROFORMA_INVOICE->{
-                salePurchase.setStatus(OPEN);
-            }
+            case SALES_INVOICE ,DEBIT_NOTE,PURCHASE_RETURN-> updateItemQuantity(salePurchase, "Reduce");
+            case SALES_RETURN, CREDIT_NOTE,PURCHASE_INVOICE -> updateItemQuantity(salePurchase, "Increment");
+            case PURCHASE_ORDER ,DELIVERY_CHALLAN,QUOTATION,PROFORMA_INVOICE-> salePurchase.setStatus(OPEN);
         }
         return salePurchaseRepository.save(salePurchase);
     }
