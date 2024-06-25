@@ -22,8 +22,8 @@ public class CommonUtils implements Serializable {
     public static final String DELIVERY_CHALLAN= "DELIVERY_CHALLAN";
     public static final String QUOTATION="QUOTATION";
     public static final String PROFORMA_INVOICE=   "PROFORMA_INVOICE";
-    public static final String OPEN="OPEN";
-    public static final String CLOSED="CLOSED";
+    public static final String OPEN="Open";
+    public static final String CLOSED="Closed";
     public static final String ALL_TRANSACTION = "All Transaction";
     public static final String FULL_PAID = "Paid";
     public static final String UN_PAID = "Un Paid";
