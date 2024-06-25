@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.hesabbook.utils.CommonUtils.CREDIT_NOTE;
+import static com.hesabbook.utils.CommonUtils.DEBIT_NOTE;
 import static com.hesabbook.utils.CommonUtils.FULL_PAID;
 import static com.hesabbook.utils.CommonUtils.PARTIAL_PAID;
+import static com.hesabbook.utils.CommonUtils.PURCHASE_INVOICE;
+import static com.hesabbook.utils.CommonUtils.PURCHASE_RETURN;
 import static com.hesabbook.utils.CommonUtils.SALES_INVOICE;
 import static com.hesabbook.utils.CommonUtils.SALES_RETURN;
 import static com.hesabbook.utils.CommonUtils.UN_PAID;
@@ -55,10 +58,10 @@ public class SalePurchaseService {
             }
         }
         switch (salePurchase.getBillType()) {
-            case SALES_INVOICE -> {
+            case SALES_INVOICE ,DEBIT_NOTE,PURCHASE_RETURN-> {
                 updateItemQuantity(salePurchase, "Reduce");
             }
-            case SALES_RETURN, CREDIT_NOTE -> {
+            case SALES_RETURN, CREDIT_NOTE,PURCHASE_INVOICE -> {
                 updateItemQuantity(salePurchase, "Increment");
             }
         }
