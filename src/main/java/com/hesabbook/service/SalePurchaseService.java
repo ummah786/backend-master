@@ -15,10 +15,15 @@ import org.springframework.stereotype.Service;
 
 import static com.hesabbook.utils.CommonUtils.CREDIT_NOTE;
 import static com.hesabbook.utils.CommonUtils.DEBIT_NOTE;
+import static com.hesabbook.utils.CommonUtils.DELIVERY_CHALLAN;
 import static com.hesabbook.utils.CommonUtils.FULL_PAID;
+import static com.hesabbook.utils.CommonUtils.OPEN;
 import static com.hesabbook.utils.CommonUtils.PARTIAL_PAID;
+import static com.hesabbook.utils.CommonUtils.PROFORMA_INVOICE;
 import static com.hesabbook.utils.CommonUtils.PURCHASE_INVOICE;
+import static com.hesabbook.utils.CommonUtils.PURCHASE_ORDER;
 import static com.hesabbook.utils.CommonUtils.PURCHASE_RETURN;
+import static com.hesabbook.utils.CommonUtils.QUOTATION;
 import static com.hesabbook.utils.CommonUtils.SALES_INVOICE;
 import static com.hesabbook.utils.CommonUtils.SALES_RETURN;
 import static com.hesabbook.utils.CommonUtils.UN_PAID;
@@ -64,9 +69,10 @@ public class SalePurchaseService {
             case SALES_RETURN, CREDIT_NOTE,PURCHASE_INVOICE -> {
                 updateItemQuantity(salePurchase, "Increment");
             }
+            case PURCHASE_ORDER ,DELIVERY_CHALLAN,QUOTATION,PROFORMA_INVOICE->{
+                salePurchase.setStatus(OPEN);
+            }
         }
-
-
         return salePurchaseRepository.save(salePurchase);
     }
 
