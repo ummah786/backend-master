@@ -35,40 +35,18 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Partner implements Serializable {
+public class Transactions implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
     private Integer id;
-    private String pName;//show
-    private String mobileNumber;//show
-    private String email;
-    private String openingBalance;  //show
-    private String openingBalanceType;
-    private String partyType;  //customer ya Supllier  //show
-    private String partyCategory;
-    private String billingAddress;
-    private String shippingAddress;
-    private String gstNumber;
-    private String creditPeriod;
-    private String creditLimit;  //show
-    private String creditPeriodType;
-    private String loyalty;
-    private String enableSharingToCA;
-    private String shareGSTR1;
-    private String shareGSTR2;
-    private String company;
-    private String primary_user_id;
-    private String secondary_user_id;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Address> multipleShippingAddress;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Statement> statementList;
 
-
+    private Integer spNo;
+    private String amount;   //total Amount
+    private String status;  //paid unpaid ...
+    private String transactionType;  //SALE INvoice ...
     private Date creationDateTime;
-
     @PrePersist
     public void prePersist() {
         this.creationDateTime = new Date();

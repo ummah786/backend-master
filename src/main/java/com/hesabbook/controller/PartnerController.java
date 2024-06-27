@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
-import com.hesabbook.entity.Address;
+import com.hesabbook.entity.party.Address;
 import com.hesabbook.entity.party.Partner;
 import com.hesabbook.service.party.PartyService;
 import com.hesabbook.utils.BusinessResponse;

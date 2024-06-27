@@ -1,4 +1,4 @@
-package com.hesabbook.entity;
+package com.hesabbook.entity.party;
 
 import java.io.Serializable;
 

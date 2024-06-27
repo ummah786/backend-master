@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.hesabbook.batch.BatchUpdate;
-import com.hesabbook.entity.Address;
+import com.hesabbook.entity.party.Address;
 import com.hesabbook.entity.ProductKeyValuePair;
 import com.hesabbook.entity.party.Partner;
 import com.hesabbook.repository.AddressRepository;
