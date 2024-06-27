@@ -61,11 +61,14 @@ public class Partner implements Serializable {
     private String company;
     private String primary_user_id;
     private String secondary_user_id;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Address> multipleShippingAddress;
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Statement> statementList;
-
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ItemWiseReport> itemWiseReportList;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Transactions> transactionsList;
 
     private Date creationDateTime;
 
