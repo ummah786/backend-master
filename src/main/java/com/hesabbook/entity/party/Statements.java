@@ -31,7 +31,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Statement implements Serializable {
+public class Statements implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_Sequence")

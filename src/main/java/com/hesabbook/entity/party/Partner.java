@@ -64,7 +64,7 @@ public class Partner implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Address> multipleShippingAddress;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Statement> statementList;
+    private List<Statements> statementsList;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ItemWiseReport> itemWiseReportList;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

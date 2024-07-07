@@ -43,4 +43,5 @@ public class Transaction implements Serializable {
     private String paid;
     private String received;
     private String balance;
+    private String status;
 }
